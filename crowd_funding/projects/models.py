@@ -1,37 +1,28 @@
-# from django.db import models
-# # from taggit.managers import TaggableManager
-# from django.contrib.auth.models import User 
-
-# # Create your models here.
-# class Category(models.Model):
-#     name=models.CharField(max_length=255)
-
-
-#     def __str__(self):
-#         return f"{self.name}"
-    
-
-
-
-# class Project(models.Model):
-#         title=models.CharField(max_length=100)
-#         details=models.TextField(max_length=255)
-#         category=models.ForeignKey(Category,on_delete=models.CASCADE)
-#         start_time=models.DateField(auto_now=False, auto_now_add=False)
-#         end_time=models.DateField(auto_now=False, auto_now_add=False)
-
-
 from django.db import models
 from django.shortcuts import render
 from django.urls import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
+import os
 # from users.models import CustomUser
 # from category.models import Category
 
-# Create your models here.
 
-import os
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(max_length=200, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return f"{self.name}"
+
+    @classmethod
+    def get_all_objects(cls):
+        return cls.objects.all()
+
 
 def get_image_path(instance, filename):
     # Constructing the file path based on owner's ID
@@ -43,11 +34,11 @@ def get_image_path(instance, filename):
 
 
 class Project(models.Model):
-    HOT = 'hot'
-    NEW = 'new'
-    TOP = 'top'
-    BEST = 'best'
-    ENDING_SOON = 'endingsoon'
+    HOT = 'Hot'
+    NEW = 'New'
+    TOP = 'Top'
+    BEST = 'Best'
+    ENDING_SOON = 'EndingSoon'
 
     TAG_CHOICES = [
         (HOT, 'Hot'),
