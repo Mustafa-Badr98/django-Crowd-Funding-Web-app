@@ -29,7 +29,7 @@ def add_rating_view(request, project_id):
     else:
         form = RatingForm()
 
-    return render(request, 'add_rating.html', {'form': form, 'project': project})
+    return render(request, 'rate/add_rating.html', {'form': form, 'project': project})
 
 
 

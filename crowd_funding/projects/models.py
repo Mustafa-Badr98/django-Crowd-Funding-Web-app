@@ -20,6 +20,25 @@ def get_image_path(instance, filename):
     return f'projects/images/project{project_id}/{base_filename}{file_extension}'
 
 
+
+
+
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(max_length=200, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return f"{self.name}"
+
+    @classmethod
+    def get_all_objects(cls):
+        return cls.objects.all()
+              
 class Project(models.Model):
     HOT = 'Hot'
     NEW = 'New'
@@ -45,7 +64,7 @@ class Project(models.Model):
     image4=models.ImageField(upload_to=get_image_path, null=True, blank=True)
     main_image = models.ImageField(upload_to=get_image_path, null=True, blank=True)
     total_target=models.FloatField()
-    current_fund=models.FloatField()
+    current_fund=models.FloatField(default=0)
     num_of_ratings = models.PositiveIntegerField(default=0)
     total_rate = models.IntegerField(default=0)
     average_rate = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)], default=0)
@@ -56,13 +75,13 @@ class Project(models.Model):
     tag3 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
     tag4 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
     
-    start_date=models.DateTimeField(default=timezone.now())
+    start_date=models.DateTimeField(default=timezone.now)
     end_date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
-    def _str_(self):
+    def __str__(self):
         return f"{self.title}"
     
     
@@ -122,24 +141,20 @@ class Project(models.Model):
 
         self.save()
         
-class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    description = models.TextField(max_length=200, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
 
-    def __str__(self):
-        return f"{self.name}"
 
-    @classmethod
-    def get_all_objects(cls):
-        return cls.objects.all()
-        
 class Rating(models.Model):
+    class RateValue(models.IntegerChoices):
+        ONE = 1, '1'
+        TWO = 2, '2'
+        THREE = 3, '3'
+        FOUR = 4, '4'
+        FIVE = 5, '5'
+        
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    rate = models.IntegerField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
+    rate_value = models.IntegerField(choices=RateValue.choices,default=1)
 
     class Meta:
-        unique_together = ('user', 'project')  # Ensure each user can rate a project only once        
+        unique_together = ('user', 'project')  # Ensure each user can rate a project only once  
