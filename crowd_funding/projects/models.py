@@ -158,3 +158,7 @@ class Rating(models.Model):
 
     class Meta:
         unique_together = ('user', 'project')  # Ensure each user can rate a project only once  
+    
+    
+    def __str__(self):
+        return f"{self.user} rated {self.project} with {self.rate_value} stars"    
