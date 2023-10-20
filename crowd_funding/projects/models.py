@@ -3,34 +3,21 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
+from django.contrib.auth.models import User
 import os
 # from users.models import CustomUser
 # from category.models import Category
 
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    description = models.TextField(max_length=200, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-
-    def __str__(self):
-        return f"{self.name}"
-
-    @classmethod
-    def get_all_objects(cls):
-        return cls.objects.all()
 
 
 def get_image_path(instance, filename):
 
-    owner_id = str(instance.owner.id)
     project_id = str(instance.id)
     
     base_filename, file_extension = os.path.splitext(filename)
-    return f'projects/images/owner{owner_id}/project{project_id}/{base_filename}{file_extension}'
+    return f'projects/images/project{project_id}/{base_filename}{file_extension}'
 
 
 class Project(models.Model):
@@ -59,9 +46,10 @@ class Project(models.Model):
     main_image = models.ImageField(upload_to=get_image_path, null=True, blank=True)
     total_target=models.FloatField()
     current_fund=models.FloatField()
-    # rate = models.IntegerField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],default=0)
-    # num_of_ratings=models.PositiveIntegerField(default=0)
-    # average_rate=models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],default=1)
+    num_of_ratings = models.PositiveIntegerField(default=0)
+    total_rate = models.IntegerField(default=0)
+    average_rate = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)], default=0)
+
    
     tag1 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
     tag2 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
@@ -121,3 +109,37 @@ class Project(models.Model):
     def get_all_objects(cls):
         # return cls.objects.filter(id__gt=1)
         return cls.objects.all()
+    
+    
+    def add_rate(self, new_rate):
+       
+        self.total_rate += new_rate
+        self.num_of_ratings += 1
+
+        if self.num_of_ratings > 0:
+            self.average_rate = self.total_rate / self.num_of_ratings
+            self.average_rate = round(self.average_rate, 2)
+
+        self.save()
+        
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(max_length=200, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return f"{self.name}"
+
+    @classmethod
+    def get_all_objects(cls):
+        return cls.objects.all()
+        
+class Rating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    rate = models.IntegerField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
+
+    class Meta:
+        unique_together = ('user', 'project')  # Ensure each user can rate a project only once        
