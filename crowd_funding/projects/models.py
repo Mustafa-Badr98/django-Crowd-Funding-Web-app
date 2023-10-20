@@ -162,3 +162,19 @@ class Rating(models.Model):
     
     def __str__(self):
         return f"{self.user} rated {self.project} with {self.rate_value} stars"    
+    
+    
+    
+    
+    
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    comment_text = models.TextField()
+    
+    class Meta:
+        unique_together = ('user', 'project')    
+        
+        
+    def __str__(self):
+        return f"{self.user} commented on  {self.project}"        
