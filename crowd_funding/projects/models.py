@@ -141,6 +141,12 @@ class Project(models.Model):
 
         self.save()
         
+    def get_all_ratings(self):
+        return self.ratings.all()    
+        
+    def get_all_comments(self):
+        return self.comments.all()    
+        
 
 
 
@@ -153,7 +159,7 @@ class Rating(models.Model):
         FIVE = 5, '5'
         
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE,related_name='ratings')
     rate_value = models.IntegerField(choices=RateValue.choices,default=1)
 
     class Meta:
@@ -169,7 +175,7 @@ class Rating(models.Model):
     
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE,related_name='comments')
     comment_text = models.TextField()
     
     class Meta:
