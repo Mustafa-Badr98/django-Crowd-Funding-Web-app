@@ -43,12 +43,12 @@
                     <ul class="navbar-nav">
 
                         <li class="mt-1 me-5 fs-6">
-                            <a href="{% url 'user.profile' %}" class="fs-4 rounded text-dark">
-                                {% if user.id%}
-                                {{user.user_name}}
-                                {% else %}
+                            <a href="" class="fs-4 rounded text-dark">
+                                {% comment %} {% if user.id%} {% endcomment %}
+                                {% comment %} {{user.user_name}} {% endcomment %}
+                                {% comment %} {% else %} {% endcomment %}
 
-                                {% endif %}
+                                {% comment %} {% endif %} {% endcomment %}
                             </a>
                         </li>
                         <li class="nav-item ">
@@ -59,28 +59,28 @@
                         </li>
 
 
-                        {% if user.id %}
+                        {% comment %} {% if user.id %} {% endcomment %}
 
                         <li class="nav-item">
-                            <a href="{% url 'logout' %}" class="text-light fs-6 me-2 btn btn-dark">
+                            <a href="" class="text-light fs-6 me-2 btn btn-dark">
                                 Logout
                             </a>
                         </li>
-                        {% else %}
+                        {% comment %} {% else %} {% endcomment %}
                         <div class="d-flex flex-column flex-lg-row">
                             <li class="nav-item">
-                                <a href="{% url 'login' %}" class="text-light fs-6 me-2 btn btn-dark">
+                                <a href="" class="text-light fs-6 me-2 btn btn-dark">
                                     LogIn
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark fs-6 " href="{% url 'register' %}">
+                                <a class="nav-link text-dark fs-6 " href="">
                                     SignUp
                                 </a>
                             </li>
                         </div>
 
-                        {% endif %}
+                        {% comment %} {% endif %} {% endcomment %}
 
                     </ul>
                 </div>
