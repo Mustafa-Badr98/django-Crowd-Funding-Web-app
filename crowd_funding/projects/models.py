@@ -25,7 +25,7 @@ class Category(models.Model):
 
 
 def get_image_path(instance, filename):
-    # Constructing the file path based on owner's ID
+
     owner_id = str(instance.owner.id)
     project_id = str(instance.id)
     
@@ -49,7 +49,7 @@ class Project(models.Model):
     ]
     title = models.CharField(max_length=100, unique=True)
     details = models.TextField(max_length=200, null=True, blank=True)
-    # Category=models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category', null=True, blank=True)
+    Category=models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category', null=True, blank=True)
     # owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='users', null=True, blank=True)
     
     image1=models.ImageField(upload_to=get_image_path, null=True, blank=True)
