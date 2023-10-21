@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <h1 style=" margin: 50px;"> Your Profile Info: </h1>
+    <form method="post" enctype="multipart/form-data" style="margin-left: 50px;">
+        {% csrf_token %}
+        <div style=" margin-left: 30px; ">
+            <h4>Image:</h2>
+            <img src= '{{user.get_image_url}}'> </img>
+            <h4>User Name:</h2>
+            <p>{{user.username}}</p>
+            <h4>First Name:</h2>
+            <p>{{user.first_name}}</p>
+            <h4>Last Name:</h2>
+            <p>{{user.last_name}}</p>
+            <h4>E-mail Address:</h2>
+            <p>{{user.email}}</p>
+            <h4>Phone:</h2>
+            <p>{{user.phone_number}}</p>
+        </div>
+        <a class="btn btn-warning" aria-current="page" href="{% url 'profile_edit'%}" style="margin: 20px;">Edit</a>
+        <a class="btn btn-danger" aria-current="page" href="{% url 'profile_delete'%}" style="margin: 20px;">Delete</a>
+    </form>
+    <script src="{% static 'accounts/js/script.js'%}"></script>
+{% endblock content %} 

@@ -1,6 +1,8 @@
-from django.shortcuts import redirect
-from django.views.generic import TemplateView
+from django.shortcuts import redirect, reverse
+from django.views.generic import DetailView, TemplateView
 from django.views.generic.edit import  CreateView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from django.contrib import messages
@@ -12,6 +14,7 @@ from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from .forms import AccountForm
 from .models import UserProfile
+
 
 
 
@@ -88,3 +91,25 @@ class ActivationSuccessView(TemplateView):
 class ActivationFailureView(TemplateView):
     template_name = 'registration/activation_failure.html'
 
+
+
+def profile(request):
+    url= reverse('profile_view')
+    return  redirect(url)
+
+
+# Decorator to ensure the user is logged in
+class LoginRequiredMixin:
+    @method_decorator(login_required(login_url='/login/'))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+
+
+class ProfileDetailView(LoginRequiredMixin, DetailView):
+    model = UserProfile
+    template_name = 'accounts/profile_detail.html'
+    context_object_name = 'profile_view'
+
+    def get_object(self, queryset=None):
+        return self.request.user
