@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {% csrf_token %}
+    <div style="height: 500px;">
+        {% csrf_token %}
+        <h2 style="margin: 55px;">Registration successful! Please check your email for activation instructions.</h2>
+        <script src="{% static 'accounts/js/script.js'%}"></script>
+    </div>
+    
+
+{% endblock content %}
