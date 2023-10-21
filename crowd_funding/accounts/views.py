@@ -1,14 +1,38 @@
+from django.shortcuts import redirect
 from django.views.generic.edit import  CreateView
 from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from .forms import AccountForm
 from .models import UserProfile
+
+
+def activate(request, uidb64, token):
+    User = get_user_model()
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except:
+        user = None
+
+    print(account_activation_token.check_token(user, token))
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+
+        messages.success(request, "Thank you for your email confirmation. Now you can login your account.")
+        return redirect('login')
+    else:
+        messages.error(request, "Activation link is invalid!")
+
+    return redirect('registration_success')
 
 
 
@@ -44,6 +68,6 @@ class AccountCreateView(CreateView):
         user.is_active = False
         user.save()
 
-        # login(self.request, self.object)
+        activateEmail(self.request, user, form.cleaned_data.get('email'))
         return response
     
