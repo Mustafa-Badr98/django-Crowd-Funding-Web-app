@@ -61,7 +61,7 @@
         </div>
     </div>
     <div class="row mt-4">
-        <div class="offset-2 col-7 ms-4 px-1">
+        <div class="col-7 ">
             <div class="row">
                 <p style="color: silver;" class="fs-5 fw-bold">{{ filteredObject.title }}</p>
             </div>
@@ -101,7 +101,7 @@
                 </div>
             </div>
             <div class="row py-0 mt-3 ">
-                <div class="col-4">
+                <div class="col-6">
                     <div class="pb-4 fs-5 fw-bold">Name: </div>
                     <div class="row">
 
@@ -111,7 +111,7 @@
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-6">
                     <div class="pb-4 fs-5 fw-bold">Owner: {{ project.owner }} </div>
                     <div class="row">
                         <div class="col-5">
@@ -136,7 +136,7 @@
             </div>
             <div class="row mt-4 ">
                 <span class="fs-5 fw-bold">Description :</span>
-                <div class="container mt-5">{{ project.body }}</div>
+                <div class="container mt-1 fs-3">{{ project.details }}</div>
             </div>
         </div>
         <div class="col-3">
@@ -153,16 +153,15 @@
                             </button>
                         </div>
                         {% else %}
-                        <div class="col-4">
+                        <div class="col-6">
+                            <div class="input-group mb-3" style="max-width: 110px;">
+                                <input type="number" class="form-control" name="funds" id="" min="0" max="50000">
+                            </div>
                             <a href='{{product.get_show_url}}' style="cursor: pointer;" class="btn btn-danger">Give a
                                 Fund </a>
 
-                            <div class="mt-3 input-group mb-3" style="max-width: 110px;">
-                                <input type="number" class="form-control" name="funds" id="" min="0" max="50000">
-                            </div>
-
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             {% if rated %}
                             <span>your Rate : {{rated.rate_value}}</span>
                             <button class="btn btn-primary mt-1" type="submit">Edit</button>
@@ -173,8 +172,10 @@
                             <form method="post" action="">
                                 {% csrf_token %}
                                 {{review_form}}
-
-                                <button class="btn btn-primary ms-5 mt-1" type="submit">Submit</button>
+                                <div class="input-group mb-3" style="max-width: 110px;">
+                                    <input type="number" class="form-control" name="funds" id="" min="0" max="50000">
+                                </div>
+                                <button class="btn btn-primary " type="submit">Rate</button>
                             </form>
                             {% endif %}
 
@@ -183,20 +184,6 @@
 
 
                         {% endif %}
-                    </div>
-                    <div class="row">
-                        <div class="container">
-                            <hr class="mt-3 " />
-                            <div class="row">
-                                {% if project.owner.id == user.id %}
-                                {% else %}
-                                <button class="btn btn-success">
-                                    Report
-                                </button>
-                                {% endif %}
-
-                            </div>
-                        </div>
                     </div>
 
                 </div>
@@ -209,7 +196,7 @@
                     <li>
                         <div class="bg-primary rounded mt-2 p-2">
                             <span class="text-light"> user : {{comment.user }} commented:</span>
-                            <div class="text-light" >{{comment.comment_text}}</div>
+                            <div class="text-light">{{comment.comment_text}}</div>
                         </div>
                     </li>
 
@@ -220,16 +207,30 @@
 
 
         </div>
+        <div class="col-2">
+            <div class="row">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-8 ">
+                            {% if project.owner.id == user.id %}
+                            {% else %}
+                            <span class="fs-6">
+                                see something wrong ? report it at once..
+                            </span>
+                            <button class="btn btn-danger">
+                                Report
+                            </button>
+                            {% endif %}
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-
-<script>
-    $(document).ready(function () {
-        $('input[name="rate"]').change(function () {
-            $('#hiddenNewRate').val($(this).val());
-        });
-    });
-</script>
 
 {% endblock content %}
