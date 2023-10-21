@@ -77,3 +77,8 @@ class AccountCreateView(CreateView):
 
 class ActivationRequiredView(TemplateView):
     template_name = 'registration/success.html'
+
+
+
+class ActivationSuccessView(TemplateView):
+    template_name = 'registration/activation_success.html'
