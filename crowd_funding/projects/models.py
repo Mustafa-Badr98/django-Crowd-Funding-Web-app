@@ -15,14 +15,9 @@ import os
 def get_image_path(instance, filename):
 
     project_id = str(instance.id)
-    
+    print(project_id)
     base_filename, file_extension = os.path.splitext(filename)
     return f'projects/images/project{project_id}/{base_filename}{file_extension}'
-
-
-
-
-
 
 
 class Category(models.Model):

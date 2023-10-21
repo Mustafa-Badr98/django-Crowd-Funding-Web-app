@@ -5,11 +5,15 @@
 
 {% block landingSection %}
 
-{{all_projects}}
+<div>
+    {{all_projects}}
 
-{{featured_projects}}
+</div>
 
-{{latest_projects}}
+<div>
+    {{latest_projects}}
+
+</div>
 <div class="container">
 
     <div id="carouselExampleControls" style="height: 400px; width: 700px;" class="ms-5 mt-5 carousel slide"
@@ -18,7 +22,7 @@
             {% for pro in all_projects %}
 
             <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
-                <span onclick="window.location.href='{{pro.get_show_url}}';" style="cursor: pointer;">
+                <span onclick="window.location.href='';" style="cursor: pointer;">
                     <span class="text-danger fs-6">{{pro.title}}</span>
                     <span class="ms-1 text-danger fs-6">by {{pro.owner}}</span>
                     <span class="ms-5 text-danger fs-6">wanted funds : {{pro.total_target}}</span>
