@@ -180,10 +180,7 @@
                             {% endif %}
 
                         </div>
-
-
-
-                        {% endif %}
+                    {% endif %}
                     </div>
 
                 </div>
@@ -195,8 +192,13 @@
                     {% for comment in project.get_all_comments %}
                     <li>
                         <div class="bg-primary rounded mt-2 p-2">
-                            <span class="text-light"> user : {{comment.user }} commented:</span>
+                            <span class="text-light"> user : {{comment.user }} commented:</span> 
                             <div class="text-light">{{comment.comment_text}}</div>
+                            <div class="row">
+                                <div class="offset-8 col-4">
+                                    <a class="text-light"> report </a>
+                                </div>
+                            </div>
                         </div>
                     </li>
 
