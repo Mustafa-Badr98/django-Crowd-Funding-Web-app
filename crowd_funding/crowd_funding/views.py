@@ -11,7 +11,6 @@ class HomePageView(TemplateView):
         context['all_projects'] = Project.objects.all()
         
         context['latest_projects'] = Project.objects.order_by('-created_at')[:5]
-        print(Project.objects.order_by('-created_at')[:5])
 
         return context  
 

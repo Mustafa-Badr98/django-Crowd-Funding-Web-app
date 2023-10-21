@@ -5,6 +5,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 from django.contrib.auth.models import User
 import os
+from django.utils.translation import gettext_lazy as _
 # from users.models import CustomUser
 # from category.models import Category
 
@@ -64,7 +65,7 @@ class Project(models.Model):
     total_rate = models.IntegerField(default=0)
     average_rate = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)], default=0)
 
-   
+    is_featured = models.BooleanField(_("Is Featured"), default=False)
     tag1 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
     tag2 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
     tag3 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
