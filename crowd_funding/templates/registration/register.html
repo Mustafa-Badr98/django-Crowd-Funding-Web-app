@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <h1 style="margin-left: 30px;"> Register New Account: </h1>
+    <form method="post" enctype="multipart/form-data" style="margin-left: 50px;">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary" style="margin-top: 20px; margin-bottom: 20px;">Register</button>
+    </form>
+    <script src="{% static 'accounts/js/script.js'%}"></script>
+{% endblock content %} 
+  
