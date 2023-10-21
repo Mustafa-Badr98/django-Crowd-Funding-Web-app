@@ -101,7 +101,7 @@
                 </div>
             </div>
             <div class="row py-0 mt-3 ">
-                <div class="col-6">
+                <div class="col-4">
                     <div class="pb-4 fs-5 fw-bold">Name: </div>
                     <div class="row">
 
@@ -111,7 +111,7 @@
                     </div>
                 </div>
 
-                <div class="offset-1 col-5">
+                <div class="col-4">
                     <div class="pb-4 fs-5 fw-bold">Owner: {{ project.owner }} </div>
                     <div class="row">
                         <div class="col-5">
@@ -139,65 +139,85 @@
                 <div class="container mt-5">{{ project.body }}</div>
             </div>
         </div>
+        <div class="col-3">
+            <div class="row">
+                <div style="height: 10rem; width: 30rem;" class="col-3 border border-2 ms-2">
+                    <div class="row mt-4 ">
+                        {% if project.owner.id == user.id %}
+                        <div class="row-5">
+                            <button class="btn btn-primary">Edit your project</button>
+                        </div>
+                        <div class="row-4 mt-3">
+                            <button class="btn btn-danger">
+                                Delete your Project
+                            </button>
+                        </div>
+                        {% else %}
+                        <div class="col-4">
+                            <a href='{{product.get_show_url}}' style="cursor: pointer;" class="btn btn-danger">Give a
+                                Fund </a>
 
-        <div style="height: 10rem; width: 30rem;" class="col-3 border border-2 ms-2">
+                            <div class="mt-3 input-group mb-3" style="max-width: 110px;">
+                                <input type="number" class="form-control" name="funds" id="" min="0" max="50000">
+                            </div>
 
-            <div class="d-flex justify-content-center mt-4 ">
+                        </div>
+                        <div class="col-4">
+                            {% if rated %}
+                            <span>your Rate : {{rated.rate_value}}</span>
+                            <button class="btn btn-primary mt-1" type="submit">Edit</button>
+                            {% else %}
 
-                {% if project.owner.id == user.id %}
-                <div class="col-4">
-                    <button class="btn btn-primary">Edit your project</button>
-                </div>
-                <div class="">
-                    <button class="btn btn-danger">
-                        Delete your Project
-                    </button>
-                </div>
-                {% else %}
-                <div class="col-4">
-                    <a href='{{product.get_show_url}}' style="cursor: pointer;" class="btn btn-danger">Give a Fund </a>
+                            {% comment %} /////// here is the rates {% endcomment %}
 
-                    <div class="mt-3 input-group mb-3" style="max-width: 110px;">
-                        <input type="number" class="form-control" name="funds" id="" min="0" max="50000">
+                            <form method="post" action="">
+                                {% csrf_token %}
+                                {{review_form}}
+
+                                <button class="btn btn-primary ms-5 mt-1" type="submit">Submit</button>
+                            </form>
+                            {% endif %}
+
+                        </div>
+
+
+
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <div class="container">
+                            <hr class="mt-3 " />
+                            <div class="row">
+                                {% if project.owner.id == user.id %}
+                                {% else %}
+                                <button class="btn btn-success">
+                                    Report
+                                </button>
+                                {% endif %}
+
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-                <div class="col-4">
-                    {% if rated %}
-                    <span>your Rate : {{rated.rate_value}}</span>
-                    <button class="btn btn-primary mt-1" type="submit">Edit</button>
-                    {% else %}
-
-                    {% comment %} /////// here is the rates {% endcomment %}
-
-                    <form method="post" action="">
-                        {% csrf_token %}
-                        {{review_form}}
-
-                        <button class="btn btn-primary ms-5 mt-1" type="submit">Submit</button>
-                    </form>
-                    {% endif %}
-
-                </div>
-
-
-
-                {% endif %}
             </div>
             <div class="row">
-                <div class="container">
-                    <hr class="mt-3 " />
-                    <div class="row">
-                        {% if project.owner.id == user.id %}
-                        {% else %}
-                        <button class="btn btn-success">
-                            Report
-                        </button>
-                        {% endif %}
+                <ul>
 
-                    </div>
-                </div>
+                    <span class="fs-5">comment section </span>
+                    {% for comment in project.get_all_comments %}
+                    <li>
+                        <div class="bg-primary rounded mt-2 p-2">
+                            <span class="text-light"> user : {{comment.user }} commented:</span>
+                            <div class="text-light" >{{comment.comment_text}}</div>
+                        </div>
+                    </li>
+
+                    {% endfor %}
+                </ul>
+
             </div>
+
 
         </div>
     </div>
