@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+{% endblock content %}
+
+{% block landingSection %}
+
+{{projectsList}}
+
+<div class="container">
+    <div class="row">
+        <div class="offset-4 col-4">
+            <form class="d-flex mb-5" action="{% url 'project.search' %}" method="get">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=""
+                    name="searchedWord" />
+                <button class="btn btn-outline-success" type="submit">
+                    Search
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <h1> search result</h1>
+    </div>
+
+    {% for pro in projectsList %}
+    <ul>
+        <li> <a href="">
+                {{pro.title}}
+            </a>
+        </li>
+    </ul>
+
+
+
+
+    {% endfor %}
+
+
+
+</div>
+</div>
+
+{% endblock landingSection %}
