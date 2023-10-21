@@ -7,25 +7,68 @@
 
 {{projectsList}}
 
-
+<h1>
+    {{featured_projects}}
+</h1>
 <div class="container">
     <div class="row">
         <div class="offset-4 col-4">
             <form class="d-flex mb-5" action="{% url 'project.search' %}" method="get">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=""
-                name="searchedWord" />
-              <button class="btn btn-outline-success" type="submit">
-                Search
-              </button>
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=""
+                    name="searchedWord" />
+                <button class="btn btn-outline-success" type="submit">
+                    Search
+                </button>
             </form>
-          </div>
+        </div>
+    </div>
+    <div class="row mb-5">
+
+        <div class="offset-1 col-8">
+
+            <span class="fs-5 offset-1">Featured Projects</span>
+            <div id="carouselFeatured" style="height: 500px; width: 700px;" class="ms-5 mt-5 carousel slide"
+                data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for pro in featured_projects %}
+
+                    <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
+                        <span onclick="window.location.href='';" style="cursor: pointer;">
+                            <span class="text-danger fs-6">{{pro.title}}</span>
+                            <span class="ms-1 text-danger fs-6">By {{pro.owner}}</span>
+                            <span class="ms-5 text-danger fs-6">Goal funds : {{pro.total_target}}</span>
+                            <span class="ms-5 text-danger fs-6">Rate : {{pro.average_rate}}
+                            </span>
+                            <img src="{{pro.get_main_image_url}}" style="height: 400px ;width: 700px;" class="d-block  "
+                                alt="...">
+                        </span>
+                    </div>
+
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselFeatured"
+                    data-bs-slide="prev">
+                    <span style="background-color: black;
+                    scale: 2;" class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselFeatured"
+                    data-bs-slide="next">
+                    <span style="background-color: black;
+                    scale: 2;" class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+        </div>
+
     </div>
     <div class="row mb-5">
 
         <div class="offset-1 col-8">
 
             <span class="fs-5 offset-1">the latest 5 projects</span>
-            <div id="carouselExampleControls" style="height: 500px; width: 800px;" class="ms-5 mt-5 carousel slide"
+            <div id="carouselExampleControls" style="height: 500px; width: 700px;" class="ms-5 mt-5 carousel slide"
                 data-bs-ride="carousel">
                 <div class="carousel-inner">
                     {% for pro in latest_projects %}
@@ -33,9 +76,9 @@
                     <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
                         <span onclick="window.location.href='';" style="cursor: pointer;">
                             <span class="text-danger fs-6">{{pro.title}}</span>
-                            <span class="ms-1 text-danger fs-6">by {{pro.owner}}</span>
-                            <span class="ms-5 text-danger fs-6">wanted funds : {{pro.total_target}}</span>
-                            <span class="ms-5 text-danger fs-6">tags : {{pro.tag1}}, {{pro.tag2}}, {{pro.tag3}},
+                            <span class="ms-1 text-danger fs-6">By {{pro.owner}}</span>
+                            <span class="ms-5 text-danger fs-6">Goal funds : {{pro.total_target}}</span>
+                            <span class="ms-5 text-danger fs-6">Rate : {{pro.average_rate}}
                                 {{pro.tag4}}</span>
                             <img src="{{pro.get_main_image_url}}" style="height: 400px ;width: 700px;" class="d-block  "
                                 alt="...">
@@ -46,12 +89,14 @@
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                     data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span style="background-color: black;
+                    scale: 2;" class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
                     data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span style="background-color: black;
+                    scale: 2;" class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
@@ -60,12 +105,12 @@
 
     </div>
 
-    <div class="row">
+    <div class="row mb-5">
 
         <div class="offset-1 col-8">
 
             <span class="fs-5 offset-1">the highest five rated</span>
-            <div id="carouselExampleControls" style="height: 500px; width: 800px;" class="ms-5 mt-5 carousel slide"
+            <div id="carouselHighest" style="height: 500px; width: 700px;" class="ms-5 mt-5 carousel slide"
                 data-bs-ride="carousel">
                 <div class="carousel-inner">
                     {% for pro in all_projects %}
@@ -73,10 +118,10 @@
                     <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
                         <span onclick="window.location.href='';" style="cursor: pointer;">
                             <span class="text-danger fs-6">{{pro.title}}</span>
-                            <span class="ms-1 text-danger fs-6">by {{pro.owner}}</span>
-                            <span class="ms-5 text-danger fs-6">wanted funds : {{pro.total_target}}</span>
-                            <span class="ms-5 text-danger fs-6">tags : {{pro.tag1}}, {{pro.tag2}}, {{pro.tag3}},
-                                {{pro.tag4}}</span>
+                            <span class="ms-1 text-danger fs-6">By {{pro.owner}}</span>
+                            <span class="ms-5 text-danger fs-6">Goal funds : {{pro.total_target}}</span>
+                            <span class="ms-5 text-danger fs-6">Rate : {{pro.average_rate}}
+                            </span>
                             <img src="{{pro.get_main_image_url}}" style="height: 400px ;width: 700px;" class="d-block  "
                                 alt="...">
                         </span>
@@ -84,14 +129,16 @@
 
                     {% endfor %}
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselHighest"
                     data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span style="background-color: black;
+                    scale: 2;" class="carousel-control-prev-icon " aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselHighest"
                     data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span style="background-color: black;
+                    scale: 2;" class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>

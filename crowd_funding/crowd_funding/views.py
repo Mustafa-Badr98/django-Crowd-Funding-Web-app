@@ -8,9 +8,10 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        context['all_projects'] = Project.objects.all()
-        
+        context['all_projects'] = Project.objects.all()[:10]
         context['latest_projects'] = Project.objects.order_by('-created_at')[:5]
+        context['featured_projects'] = Project.objects.filter(is_featured=True)[:5]
+        
 
         return context  
 
