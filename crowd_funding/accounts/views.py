@@ -129,7 +129,6 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
 
 
-
 class ProfileDeleteView(LoginRequiredMixin, DeleteView):
     model = UserProfile
     template_name = 'accounts/profile_confirm_delete.html'
