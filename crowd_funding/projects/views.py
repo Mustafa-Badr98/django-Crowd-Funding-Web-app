@@ -39,3 +39,12 @@ def searchProject(request):
     print(searchedWord)
     searchedProject = Project.objects.filter(title__icontains=searchedWord)
     return render(request, "proj/search_project_page.html", context={"projectsList": searchedProject, "searchedWord": searchedWord})
+
+
+
+
+
+def ViewProject(request,id):  
+    filteredProject = Project.objects.get(id=id)
+    return render(request, 'projectDetails.html', context={"project": filteredProject,})
+ 

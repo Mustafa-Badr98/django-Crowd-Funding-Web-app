@@ -30,7 +30,7 @@
                     {% for pro in featured_projects %}
 
                     <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
-                        <span onclick="window.location.href='';" style="cursor: pointer;">
+                        <span onclick="window.location.href='{% url 'projects.show' pro.id %}';" style="cursor: pointer;">
                             <span class="text-danger fs-6">{{pro.title}}</span>
                             <span class="ms-1 text-danger fs-6">By {{pro.owner}}</span>
                             <span class="ms-5 text-danger fs-6">Goal funds : {{pro.total_target}}</span>
@@ -71,7 +71,7 @@
                     {% for pro in latest_projects %}
 
                     <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
-                        <span onclick="window.location.href='';" style="cursor: pointer;">
+                        <span onclick="window.location.href='{% url 'projects.show' pro.id %}';" style="cursor: pointer;">
                             <span class="text-danger fs-6">{{pro.title}}</span>
                             <span class="ms-1 text-danger fs-6">By {{pro.owner}}</span>
                             <span class="ms-5 text-danger fs-6">Goal funds : {{pro.total_target}}</span>
@@ -113,7 +113,7 @@
                     {% for pro in all_projects %}
 
                     <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
-                        <span onclick="window.location.href='';" style="cursor: pointer;">
+                        <span onclick="window.location.href='{% url 'projects.show' pro.id %}';" style="cursor: pointer;">
                             <span class="text-danger fs-6">{{pro.title}}</span>
                             <span class="ms-1 text-danger fs-6">By {{pro.owner}}</span>
                             <span class="ms-5 text-danger fs-6">Goal funds : {{pro.total_target}}</span>
