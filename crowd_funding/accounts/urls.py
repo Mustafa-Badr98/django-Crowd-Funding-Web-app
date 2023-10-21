@@ -1,7 +1,7 @@
 
 from django.urls import include
 from django.urls import path
-from accounts.views import profile, AccountCreateView, ProfileDetailView, ProfileUpdateView, ActivationSuccessView, ActivationFailureView, ActivationRequiredView, activate
+from accounts.views import AccountCreateView, ProfileDetailView, ProfileUpdateView, ProfileDeleteView,ActivationSuccessView, ActivationFailureView, ActivationRequiredView, profile, activate
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('register', AccountCreateView.as_view(), name='accounts.register'),
@@ -12,5 +12,6 @@ urlpatterns = [
     path('profile/', profile, name='accounts.profile'),
     path('profile/view/', ProfileDetailView.as_view(), name='profile_view'),
     path('profile/edit/', ProfileUpdateView.as_view(), name='profile_edit'),
+    path('profile/delete/', ProfileDeleteView.as_view(), name='profile_delete'),
 
 ]

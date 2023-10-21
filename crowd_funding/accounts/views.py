@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, reverse
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import DetailView, UpdateView, DeleteView, TemplateView
 from django.views.generic.edit import  CreateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -126,4 +126,16 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('profile_view')
+
+
+
+
+class ProfileDeleteView(LoginRequiredMixin, DeleteView):
+    model = UserProfile
+    template_name = 'accounts/profile_confirm_delete.html'
+    success_url = reverse_lazy('accounts.register')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
 
