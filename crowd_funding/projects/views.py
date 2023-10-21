@@ -21,6 +21,21 @@ def create_project(request):
 
 
 
+def edit_project(request,id):
+    project=Project.get_specific_object(id=id)
+    form=ProjectForm(instance=project)
+    if request.method == 'POST':
+        form=ProjectForm(request.POST, request.FILES,instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        
+    return render(request, 'projects/edit.html', {'form':form})
+          
+
+
+
+
 @login_required
 def add_rating_view(request, project_id):
     project = get_object_or_404(Project, id=project_id)
