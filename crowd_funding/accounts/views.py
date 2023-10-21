@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.views.generic import TemplateView
 from django.views.generic.edit import  CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
@@ -11,6 +12,7 @@ from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from .forms import AccountForm
 from .models import UserProfile
+
 
 
 def activate(request, uidb64, token):
@@ -71,3 +73,7 @@ class AccountCreateView(CreateView):
         activateEmail(self.request, user, form.cleaned_data.get('email'))
         return response
     
+
+
+class ActivationRequiredView(TemplateView):
+    template_name = 'registration/success.html'
