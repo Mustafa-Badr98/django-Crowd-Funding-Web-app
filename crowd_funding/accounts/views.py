@@ -113,3 +113,17 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = UserProfile
+    template_name = 'accounts/profile_form.html'
+    fields = ['username', 'first_name', 'last_name', 'phone_number', 'image']
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy('profile_view')
+
