@@ -1,4 +1,3 @@
-
 from django.urls import include
 from django.urls import path
 from accounts.views import AccountCreateView, ProfileDetailView, ProfileUpdateView, ProfileDeleteView,ActivationSuccessView, ActivationFailureView, ActivationRequiredView, profile, activate
@@ -13,5 +12,4 @@ urlpatterns = [
     path('profile/view/', ProfileDetailView.as_view(), name='profile_view'),
     path('profile/edit/', ProfileUpdateView.as_view(), name='profile_edit'),
     path('profile/delete/', ProfileDeleteView.as_view(), name='profile_delete'),
-
 ]
