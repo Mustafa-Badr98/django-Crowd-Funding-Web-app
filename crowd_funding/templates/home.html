@@ -6,9 +6,20 @@
 {% block landingSection %}
 
 <div class="container">
+    <div class="row">
+        <div class="offset-4 col-4">
+            <form class="d-flex mb-5" action="" method="get">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=""
+                name="searchedWord" />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+    </div>
     <div class="row mb-5">
 
-        <div class="offset-2 col-8">
+        <div class="offset-1 col-8">
 
             <span class="fs-5 offset-1">the latest 5 projects</span>
             <div id="carouselExampleControls" style="height: 500px; width: 800px;" class="ms-5 mt-5 carousel slide"
@@ -48,7 +59,7 @@
 
     <div class="row">
 
-        <div class="offset-2 col-8">
+        <div class="offset-1 col-8">
 
             <span class="fs-5 offset-1">the highest five rated</span>
             <div id="carouselExampleControls" style="height: 500px; width: 800px;" class="ms-5 mt-5 carousel slide"

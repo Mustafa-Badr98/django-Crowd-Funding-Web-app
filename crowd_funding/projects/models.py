@@ -66,6 +66,7 @@ class Project(models.Model):
     average_rate = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)], default=0)
 
     is_featured = models.BooleanField(_("Is Featured"), default=False)
+    
     tag1 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
     tag2 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
     tag3 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
