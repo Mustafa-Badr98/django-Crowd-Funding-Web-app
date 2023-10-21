@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+{% endblock %}
 
-{% endblock content %}
+
 {% block landingSection %}
 
 <form method="post" enctype="multipart/form-data" class="my-4">
@@ -11,6 +12,5 @@
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-<script src="{% static 'js/script.js'%}"></script>
-{% endblock %}
+<script src="{% static 'bootstrap/js/script.js'%}"></script>
 {% endblock landingSection %}
