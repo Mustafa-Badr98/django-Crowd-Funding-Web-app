@@ -82,3 +82,9 @@ class ActivationRequiredView(TemplateView):
 
 class ActivationSuccessView(TemplateView):
     template_name = 'registration/activation_success.html'
+
+
+
+class ActivationFailureView(TemplateView):
+    template_name = 'registration/activation_failure.html'
+
