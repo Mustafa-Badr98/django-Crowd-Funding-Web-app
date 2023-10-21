@@ -16,10 +16,54 @@
             </div>
 
         </div>
-        <div data-bs-toggle="modal" data-bs-target="#viewProductsModal" class="col-xl-4">
-            <img style="height: 14.5rem;" src="{{ project.get_image1_url }}" />
-            <img style="height: 14.5rem;" class="mt-3" src="{{ project.get_image2_url  }}" />
+        <div data-bs-toggle="modal" data-bs-target="#viewProjectsImagesModal" class="col-xl-4">
+            <img width="500" height="220" src="{{ project.get_image1_url }}" />
+            <img width="500" height="220" class="mt-3" src="{{ project.get_image2_url  }}" />
         </div>
+
+
+
+        <div class="modal fade" id="viewProjectsImagesModal" tabindex="-1" aria-labelledby="viewProjectsImagesModal"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div style="height: 400px; width: 700px;" class="modal-content">
+
+                    <div id="carouselHighest" style="height: 500px; width: 700px;" class=" carousel slide"
+                        data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for imge in project.get_all_imagesArray %}
+
+                            <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
+
+                                <img src="{{imge}}" style="height: 400px ;width: 700px;" class="d-block  " alt="...">
+                                </span>
+                            </div>
+
+                            {% endfor %}
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselHighest"
+                                data-bs-slide="prev">
+                                <span style="background-color: black;
+                    scale: 2;" class="carousel-control-prev-icon " aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselHighest"
+                                data-bs-slide="next">
+                                <span style="background-color: black;
+                    scale: 2;" class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
     </div>
     <div class="row mt-4">
         <div class="offset-2 col-7 ms-4 px-1">
@@ -27,30 +71,30 @@
                 <p style="color: silver;" class="fs-5 fw-bold">{{ filteredObject.title }}</p>
             </div>
             <div class="row py-0">
-                <span class="fs-5"> Funding Target , {{ project.total_target }}
+                <span class="fs-5"> Funding Target {{ project.total_target }}
                     $</span>
             </div>
             <div class="row py-0 mt-3 ">
                 <div class="col-6">
                     <div>
-                       
+
                         <span>Rate : </span>
                         <span>{{project.average_rate}}</span>
                     </div>
                     <div class="mt-2">
-                      
+
                         <span>Category : </span>
                         <span>{{ project.Category }} </span>
                     </div>
                 </div>
                 <div class="col-6">
                     <div>
-                       
+
                         <span>Start Date : </span>
                         <span>{{ project.start_date }} M</span>
                     </div>
                     <div class="mt-2">
-                        
+
                         <span>Available to : </span>
                         <span>{{ project.end_date }} </span>
                     </div>
@@ -125,8 +169,8 @@
                 </div>
                 <div class="col-4">
                     {% if rated %}
-                        <span>your Rate : {{rated.rate_value}}</span>
-                        <button class="btn btn-primary mt-1" type="submit">Edit</button>
+                    <span>your Rate : {{rated.rate_value}}</span>
+                    <button class="btn btn-primary mt-1" type="submit">Edit</button>
                     {% else %}
 
                     {% comment %} /////// here is the rates {% endcomment %}
@@ -155,7 +199,7 @@
                             Report
                         </button>
                         {% endif %}
-                        
+
                     </div>
                 </div>
             </div>

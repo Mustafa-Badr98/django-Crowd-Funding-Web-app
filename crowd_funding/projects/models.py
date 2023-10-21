@@ -91,6 +91,20 @@ class Project(models.Model):
     def get_image4_url(self):
         return  f'/media/{self.image4}'
     
+    def get_all_imagesArray(self):
+        projectImages=[]
+        if(self.main_image):
+            projectImages.append(self.get_main_image_url)
+        if(self.image1):    
+            projectImages.append(self.get_image1_url)
+        if(self.image2):    
+            projectImages.append(self.get_image2_url)
+        if(self.image3):
+            projectImages.append(self.get_image3_url)
+        if(self.image4):
+            projectImages.append(self.get_image4_url)
+        return projectImages
+        
     def add_rate(self, new_rate):   
         self.rate += new_rate
         self.num_of_ratings += 1
