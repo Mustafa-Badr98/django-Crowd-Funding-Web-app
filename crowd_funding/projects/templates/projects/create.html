@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% endblock content %}
+{% block landingSection %}
+
+<form method="post" enctype="multipart/form-data" class="my-4">
+  {% csrf_token %}
+{{ form }}
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<script src="{% static 'js/script.js'%}"></script>
+{% endblock %}
+{% endblock landingSection %}
