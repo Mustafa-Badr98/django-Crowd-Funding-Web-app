@@ -1,14 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Project, Rating
-from .forms import RatingForm 
+from .forms import RatingForm ,ProjectForm
 
 
 
 def create_project(request):
    
-    pass
+    form=ProjectForm()
+    if request.method == 'POST':
+        form=ProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+          
+
+
+    return render(request, 'projects/create.html', {'form': form})
 
 
 
