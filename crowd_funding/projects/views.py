@@ -46,5 +46,5 @@ def searchProject(request):
 
 def ViewProject(request,id):  
     filteredProject = Project.objects.get(id=id)
-    return render(request, 'projectDetails.html', context={"project": filteredProject,})
+    return render(request, 'proj/projectDetails.html', context={"project": filteredProject,})
  
