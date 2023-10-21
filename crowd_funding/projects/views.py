@@ -33,3 +33,9 @@ def add_rating_view(request, project_id):
 
 
 
+
+def searchProject(request):
+    searchedWord = request.GET.get('searchedWord', '')
+    print(searchedWord)
+    searchedProject = Project.objects.filter(title__icontains=searchedWord)
+    return render(request, "home.html", context={"projectsList": searchedProject, "searchedWord": searchedWord})

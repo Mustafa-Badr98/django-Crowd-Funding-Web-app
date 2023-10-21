@@ -5,10 +5,13 @@
 
 {% block landingSection %}
 
+{{projectsList}}
+
+
 <div class="container">
     <div class="row">
         <div class="offset-4 col-4">
-            <form class="d-flex mb-5" action="" method="get">
+            <form class="d-flex mb-5" action="{% url 'project.search' %}" method="get">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=""
                 name="searchedWord" />
               <button class="btn btn-outline-success" type="submit">
