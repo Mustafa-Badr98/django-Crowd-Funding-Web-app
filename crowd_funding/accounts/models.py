@@ -6,6 +6,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 import uuid
+from .phonevalid import phone_validator
+
 
 
 from django.contrib.auth.models import AbstractUser, Group, Permission
@@ -17,7 +19,7 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=11, blank=True, null=True)
+    phone_number = models.CharField(max_length=11, blank=True, null=True, validators=[phone_validator])
     image = models.ImageField(blank=True, null=True)
     activation_token = models.UUIDField(default=uuid.uuid4, editable=False)
     activation_token_created_at = models.DateTimeField(default=timezone.now)
@@ -55,7 +57,7 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone_number = models.CharField(max_length=11, blank=True, null=True)
+    phone_number = models.CharField(max_length=11, blank=True, null=True, validators=[phone_validator])
     image = models.ImageField(upload_to='accounts/images/', blank=True, null=True)
     activation_token = models.UUIDField(default=uuid.uuid4, editable=False)
     activation_token_created_at = models.DateTimeField(default=timezone.now)
