@@ -1,13 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Project, Rating
-from .forms import RatingForm
+from .forms import RatingForm ,ProjectForm
 
 
 
 def create_project(request):
-    pass
+   
+    form=ProjectForm()
+    if request.method == 'POST':
+        form=ProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+          
+
+
+    return render(request, 'projects/create.html', {'form': form})
+
+
+
+def edit_project(request,id):
+    project=Project.get_specific_object(id=id)
+    form=ProjectForm(instance=project)
+    if request.method == 'POST':
+        form=ProjectForm(request.POST, request.FILES,instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        
+    return render(request, 'projects/edit.html', {'form':form})
+          
+
 
 
 
@@ -39,3 +64,6 @@ def searchProject(request):
     print(searchedWord)
     searchedProject = Project.objects.filter(title__icontains=searchedWord)
     return render(request, "proj/search_project_page.html", context={"projectsList": searchedProject, "searchedWord": searchedWord})
+
+
+

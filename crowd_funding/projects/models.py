@@ -125,7 +125,9 @@ class Project(models.Model):
     def get_all_objects(cls):
         # return cls.objects.filter(id__gt=1)
         return cls.objects.all()
-    
+    @classmethod
+    def get_specific_object(cls,id):
+        return cls.objects.get(id=id)
     
     def add_rate(self, new_rate):
        
