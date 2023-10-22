@@ -8,7 +8,6 @@
 
 {% block landingSection %}
 
-{{projectsList}}
 
 <div class="container">
     <div class="row">
@@ -26,22 +25,26 @@
         <h1> search result</h1>
     </div>
 
-    {% for pro in projectsList %}
-    <ul>
-        <li> <a href="">
-                {{pro.title}}
-            </a>
-        </li>
-    </ul>
 
 
+    <div class="row mt-4 pb-5">
+        <div class="container">
+            <div class="row">
+                {% for simProject in projectsList  %}
+                <div class="col-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{simProject.get_main_image_url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{simProject.title}}</h5>
+                            <p class="card-text">{{simProject.details}}</p>
+                            <a href="{{simProject.get_show_url}}" class="btn btn-primary">View</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
 
+            </div>
+        </div>
+    </div>
 
-    {% endfor %}
-
-
-
-</div>
-</div>
-
-{% endblock landingSection %}
+    {% endblock landingSection %}
