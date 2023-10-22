@@ -49,17 +49,31 @@ def edit_project(request,id):
 def add_rating_view2(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     if request.method == 'POST':
-        print(request.POST)
-        rate_val=int(request.POST.get('stars'))
-        rating = Rating()
-        rating.user = request.user
-        rating.project = project
-        rating.rate_value=rate_val
-        rating.save()
-        project.add_rate(rating.rate_value)
         
-        # return HttpResponseRedirect('projectDetails.html')
-        # return redirect('projectDetails.html', project_id=project_id)
+        if 'submitRate' in request.POST:
+            print(request.POST)
+            rate_val=int(request.POST.get('stars'))
+            rating = Rating()
+            rating.user = request.user
+            rating.project = project
+            rating.rate_value=rate_val
+            rating.save()
+            project.add_rate(rating.rate_value)
+        
+        
+        if 'editRate' in request.POST:
+            print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj")
+            edited_rate=Rating.objects.get(user_id=request.user.id,project_id=project_id)
+            old_rate=edited_rate.rate_value
+            new_rate=int(request.POST.get('stars'))
+            edited_rate.rate_value=new_rate
+            edited_rate.save()
+            project.edit_rate(new_rate,old_rate)
+            # print(old_rate)
+            # print(new_rate)
+            # print(edited_rate.rate_value)
+            
+       
         url = reverse('projects.show',args=[project_id])
         return redirect(url, project_id=project_id)
         
@@ -67,26 +81,6 @@ def add_rating_view2(request, project_id):
     # return redirect('projectDetails.html', project_id=project_id)
         
 
-
-# @login_required
-# def add_rating_view(request, project_id):
-#     project = get_object_or_404(Project, id=project_id)
-    
-#     if request.method == 'POST':
-#         form = RatingForm(request.POST)
-#         if form.is_valid():
-
-#             rating = form.save(commit=False)
-#             rating.user = request.user
-#             rating.project = project
-#             rating.save()
-#             project.add_rate(rating.rate)
-
-#             return redirect('projects.show', project_id=project_id)
-#     else:
-#         form = RatingForm()
-
-#     return render(request, 'rate/add_rating.html', {'form': form, 'project': project})
 
 
 
@@ -122,8 +116,10 @@ def searchProject(request):
 
 def ViewProject(request,id):  
     filteredProject = Project.objects.get(id=id)
+    filteredRate=Rating.objects.get(user_id=request.user.id,project_id=filteredProject.id)
+    print(filteredRate)
     commentForm=CommentForm()
-    return render(request, 'proj/projectDetails.html', context={"project": filteredProject,"comment_form":commentForm})
+    return render(request, 'proj/projectDetails.html', context={"project": filteredProject,"comment_form":commentForm,"rate":filteredRate})
  
  
  

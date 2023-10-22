@@ -86,10 +86,11 @@
                                 <ul class="dropdown-menu">
                                     <li>
 
-                                        <form class="rating" method="post" action="{% url 'add_rating' project.id %}">
+                                        <form class="rating" method="post" action="{% url 'add_rating' project.id %}"
+                                            id="ratingForm">
                                             {% csrf_token %}
 
-                                            <div class="col-12">
+                                            <div style="height: 35px;" class="col-12">
                                                 <label>
                                                     <input type="radio" name="stars" value="1" />
                                                     <span class="icon">★</span>
@@ -121,13 +122,20 @@
                                                     <span class="icon">★</span>
                                                 </label>
                                             </div>
-
-                                            <div class="offset-1 col-11">
-                                                <button class="btn btn-primary" type="submit">submit rate </button>
-
+                                            {% if rate %}
+                                            <div class="offset-1 col-11" id="editRating">
+                                                <button class="btn btn-primary" name='editRate' type="submit">edit rate
+                                                </button>
                                             </div>
-
+                                            {% else %}
+                                            <div class="offset-1 col-11" id="submitRating">
+                                                <button class="btn btn-primary" name='submitRate' type="submit">submit
+                                                    rate
+                                                </button>
+                                            </div>
+                                            {% endif %}
                                         </form>
+
 
                                     </li>
                                 </ul>
@@ -209,7 +217,7 @@
                     <div class="row mt-4 ">
                         {% if project.owner.id == user.id %}
                         <div class="row-5">
-                            <a href="{% url  %}" class="btn btn-primary">Edit your project</a>
+                            <a href="" class="btn btn-primary">Edit your project</a>
                         </div>
                         <div class="row-4 mt-3">
                             <button class="btn btn-danger">

@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from projects.models import Project
+from projects.models import Project,Rating
 
 
 class HomePageView(TemplateView):

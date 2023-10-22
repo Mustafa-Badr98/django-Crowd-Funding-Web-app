@@ -106,12 +106,20 @@ class Project(models.Model):
         return projectImages
         
     def add_rate(self, new_rate):   
-        self.rate += new_rate
+        self.total_rate += new_rate
         self.num_of_ratings += 1
-        self.average_rate = self.rate / self.num_of_ratings
+        self.average_rate = self.total_rate / self.num_of_ratings
         rounded_average_rate = round(self.average_rate, 2)
         self.average_rate=rounded_average_rate
         self.save()
+        
+    def edit_rate(self, new_rate,old_rate):   
+        self.total_rate -= old_rate
+        self.total_rate += new_rate
+        self.average_rate = self.total_rate / self.num_of_ratings
+        rounded_average_rate = round(self.average_rate, 2)
+        self.average_rate=rounded_average_rate
+        self.save()    
         
     
     def get_main_image_url(self):
