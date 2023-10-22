@@ -2,6 +2,9 @@
 
 {% load static %}
 {% block links %}
+<link rel="stylesheet" href="{% static 'projectDetails.css' %}">
+<link rel="stylesheet" href={% static 'bootstrap/css/bootstrap.css' %}>
+<script src="{% static 'projectDetails.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 {% endblock %}
 {% block content %} <h1> view Project page </h1>
@@ -72,10 +75,63 @@
             <div class="row py-0 mt-3 ">
                 <div class="col-6">
                     <div>
-
                         <span>Rate : </span>
                         <span>{{project.average_rate}}</span>
+                        <span class="ms-5">
+                            <span class="dropdown ">
+                                <button style="color:chocolate ;" class="btn dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Rate it
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <form class="rating" action="">
+                                            {% csrf_token %}
+                                            <label>
+                                                <input type="radio" name="stars" value="1" />
+                                                <span class="icon">★</span>
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="stars" value="2" />
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="stars" value="3" />
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="stars" value="4" />
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="stars" value="5" />
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                                <span class="icon">★</span>
+                                            </label>
+                                            {% comment %} <button type="submit">submit rate </button> {% endcomment %}
+
+                                        </form>
+
+                                    </li>
+                                </ul>
+                            </span>
+                        </span>
+
                     </div>
+
+
+
+
+
                     <div class="mt-2">
 
                         <span>Category : </span>
