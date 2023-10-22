@@ -207,3 +207,14 @@ class ReportedComment(models.Model):
     def __str__(self):
         return f"User {self.user} Reported Comment: {self.comment.id}"
     
+    
+    
+
+class Funding(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    amount = models.FloatField()
+    transaction_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} funded {self.project.title} - {self.amount}"    
