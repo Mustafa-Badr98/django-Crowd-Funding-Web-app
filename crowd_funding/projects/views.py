@@ -38,25 +38,44 @@ def add_rating_view2(request, project_id):
         
 
 
-@login_required
-def add_rating_view(request, project_id):
-    project = get_object_or_404(Project, id=project_id)
+# @login_required
+# def add_rating_view(request, project_id):
+#     project = get_object_or_404(Project, id=project_id)
     
+#     if request.method == 'POST':
+#         form = RatingForm(request.POST)
+#         if form.is_valid():
+
+#             rating = form.save(commit=False)
+#             rating.user = request.user
+#             rating.project = project
+#             rating.save()
+#             project.add_rate(rating.rate)
+
+#             return redirect('projects.show', project_id=project_id)
+#     else:
+#         form = RatingForm()
+
+#     return render(request, 'rate/add_rating.html', {'form': form, 'project': project})
+
+
+
+@login_required
+def add_comment(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
     if request.method == 'POST':
-        form = RatingForm(request.POST)
-        if form.is_valid():
+        
+        print(request.POST)
+        comment_val=request.POST.get('comment_text')
+        comment = Comment()
+        comment.user=request.user
+        comment.project=project
+        comment.comment_text=comment_val
+        comment.save()
+        
+        url = reverse('projects.show',args=[project_id])
+        return redirect(url, project_id=project_id)
 
-            rating = form.save(commit=False)
-            rating.user = request.user
-            rating.project = project
-            rating.save()
-            project.add_rate(rating.rate)
-
-            return redirect('projects.show', project_id=project_id)
-    else:
-        form = RatingForm()
-
-    return render(request, 'rate/add_rating.html', {'form': form, 'project': project})
 
 
 

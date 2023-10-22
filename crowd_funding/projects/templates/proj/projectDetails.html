@@ -80,7 +80,7 @@
                         <span class="ms-5">
                             <span class="dropdown ">
                                 <button style="color:chocolate ;" class="btn dropdown-toggle" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                     Rate it
                                 </button>
                                 <ul class="dropdown-menu">
@@ -250,7 +250,7 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <form method="post" action="">
+                <form method="post" action="{% url 'add_comment' project.id %}">
                     {% csrf_token %}
 
                     {% for field in comment_form %}
