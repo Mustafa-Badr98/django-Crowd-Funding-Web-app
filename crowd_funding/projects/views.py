@@ -14,7 +14,7 @@ from django_ratelimit.decorators import ratelimit
 from django.urls import reverse 
 from projects.models import Project, Comment, ReportedProject, ReportedComment ,Rating,Funding
 from .forms import FundingForm,ReportCommentForm, ReportProjectForm,CommentForm
-
+from django.http import Http404
 
 
 def create_project(request):
@@ -116,10 +116,19 @@ def searchProject(request):
 
 def ViewProject(request,id):  
     filteredProject = Project.objects.get(id=id)
+    similar_projects = Project.objects.filter(Category=filteredProject.Category).exclude(id=filteredProject.id)[:4]
     filteredRate=Rating.objects.get(user_id=request.user.id,project_id=filteredProject.id)
+    
+    # try:
+    #     pass
+    
+    # except Project.DoesNotExist:
+    #     raise Http404("Project does not exist")
+    # except Rating.DoesNotExist:
+    #     rating = None
     print(filteredRate)
     commentForm=CommentForm()
-    return render(request, 'proj/projectDetails.html', context={"project": filteredProject,"comment_form":commentForm,"rate":filteredRate})
+    return render(request, 'proj/projectDetails.html', context={"project": filteredProject,"comment_form":commentForm,"rate":filteredRate,'similarProjects':similar_projects})
  
  
  

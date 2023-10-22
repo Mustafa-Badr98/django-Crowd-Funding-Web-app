@@ -7,7 +7,7 @@
 <script src="{% static 'projectDetails.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 {% endblock %}
-{% block content %} <h1> view Project page </h1>
+{% block content %}
 
 
 
@@ -234,21 +234,14 @@
 
                         </div>
                         <div class="col-6">
-                            {% if rated %}
-                            <span>your Rate : {{rated.rate_value}}</span>
-                            <button class="btn btn-primary mt-1" type="submit">Edit</button>
+                            {% if project.owner.id == user.id %}
                             {% else %}
-
-                            {% comment %} /////// here is the rates {% endcomment %}
-
-                            <form method="post" action="">
-                                {% csrf_token %}
-                                {{review_form}}
-                                <div class="input-group mb-3" style="max-width: 110px;">
-                                    <input type="number" class="form-control" name="funds" id="" min="0" max="50000">
-                                </div>
-                                <button class="btn btn-primary " type="submit">Rate</button>
-                            </form>
+                            <span class="fs-6">
+                                see something wrong ? report it at once..
+                            </span>
+                            <button class="btn btn-danger">
+                                Report
+                            </button>
                             {% endif %}
 
                         </div>
@@ -273,7 +266,8 @@
                     {% for comment in project.get_all_comments %}
                     <li>
                         <div class="bg-primary rounded mt-2 p-2">
-                            <span class="text-light"> user : {{comment.user }} commented:</span>
+                            <span class="text-light"><span class="text-dark fs-5"> {{comment.user }} </span>
+                                commented:</span>
                             <div class="text-light">{{comment.comment_text}}</div>
                             <div class="row">
                                 <div class="offset-8 col-4">
@@ -289,31 +283,35 @@
 
 
             </div>
-
-
         </div>
-        <div class="col-2">
+
+    </div>
+
+    <div class="row mt-4 pb-5">
+
+        <div class="container">
+            <h1 class="pb-5">similar projects : </h1>
             <div class="row">
-                <div class="container">
-
-                    <div class="row">
-                        <div class="col-8 ">
-                            {% if project.owner.id == user.id %}
-                            {% else %}
-                            <span class="fs-6">
-                                see something wrong ? report it at once..
-                            </span>
-                            <button class="btn btn-danger">
-                                Report
-                            </button>
-                            {% endif %}
+                {% for simProject in similarProjects  %}
+                <div class="col-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{simProject.get_main_image_url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{simProject.title}}</h5>
+                            <p class="card-text">{{simProject.details}}</p>
+                            <a href="{{simProject.get_show_url}}" class="btn btn-primary">View</a>
                         </div>
-
-
                     </div>
                 </div>
+                {% endfor %}
+
             </div>
+
+
         </div>
+
+
+
     </div>
 </div>
 

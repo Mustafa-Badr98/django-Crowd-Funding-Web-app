@@ -91,6 +91,11 @@ class Project(models.Model):
     def get_image4_url(self):
         return  f'/media/{self.image4}'
     
+    
+    def get_main_image_url(self):
+        return f'/media/{self.main_image}' if self.main_image else None
+    
+    
     def get_all_imagesArray(self):
         projectImages=[]
         if(self.main_image):
@@ -121,11 +126,6 @@ class Project(models.Model):
         self.average_rate=rounded_average_rate
         self.save()    
         
-    
-    def get_main_image_url(self):
-        return f'/media/{self.main_image}' if self.main_image else None
-
-
     def get_edit_url(self):
         return  reverse('projects.edit',args=[self.id])
 
@@ -176,7 +176,7 @@ class Rating(models.Model):
     rate_value = models.IntegerField(choices=RateValue.choices,default=1)
 
     class Meta:
-        unique_together = ('user', 'project')  # Ensure each user can rate a project only once  
+        unique_together = ('user', 'project') 
     
     
     def __str__(self):
