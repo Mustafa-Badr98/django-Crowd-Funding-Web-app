@@ -4,8 +4,10 @@ from .forms import RatingForm
 from django.http import HttpResponseBadRequest
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.contrib import messages
 from django_ratelimit.decorators import ratelimit
 from projects.models import Project, Comment, ReportedProject, ReportedComment ,Rating
+from .forms import FundingForm
 
 
 
@@ -94,3 +96,32 @@ def report_comment(request, comment_id):
         ReportedComment.objects.create(user=request.user, comment=comment, reason=reason)
 
     return render(request, 'report_comment.html', {'comment': comment})
+
+
+
+
+
+
+
+@login_required
+def fund_project(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+
+    if request.method == 'POST':
+        form = FundingForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+
+            # Create a funding record
+            funding = Funding.objects.create(user=request.user, project=project, amount=amount)
+
+            # Update the current_fund of the project
+            project.current_fund += amount
+            project.save()
+
+            messages.success(request, f'Thank you for funding {project.title}!')
+            return redirect('project_detail', project_id=project.id)
+    else:
+        form = FundingForm()
+
+    return render(request, 'fund_project.html', {'project': project, 'form': form})
