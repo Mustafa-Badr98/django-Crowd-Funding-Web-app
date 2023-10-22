@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import RatingForm
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest,HttpResponseRedirect 
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.contrib import messages
 from django_ratelimit.decorators import ratelimit
+from django.urls import reverse 
 from projects.models import Project, Comment, ReportedProject, ReportedComment ,Rating,Funding
 from .forms import FundingForm,ReportCommentForm, ReportProjectForm,CommentForm
 
@@ -14,6 +15,27 @@ from .forms import FundingForm,ReportCommentForm, ReportProjectForm,CommentForm
 def create_project(request):
     pass
 
+@login_required
+def add_rating_view2(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+    if request.method == 'POST':
+        print(request.POST)
+        rate_val=int(request.POST.get('stars'))
+        rating = Rating()
+        rating.user = request.user
+        rating.project = project
+        rating.rate_value=rate_val
+        rating.save()
+        project.add_rate(rating.rate_value)
+        
+        # return HttpResponseRedirect('projectDetails.html')
+        # return redirect('projectDetails.html', project_id=project_id)
+        url = reverse('projects.show',args=[project_id])
+        return redirect(url, project_id=project_id)
+        
+    
+    # return redirect('projectDetails.html', project_id=project_id)
+        
 
 
 @login_required
