@@ -115,17 +115,19 @@ def searchProject(request):
 
 
 def ViewProject(request,id):  
-    filteredProject = Project.objects.get(id=id)
-    similar_projects = Project.objects.filter(Category=filteredProject.Category).exclude(id=filteredProject.id)[:4]
-    filteredRate=Rating.objects.get(user_id=request.user.id,project_id=filteredProject.id)
+    filteredProject = {}
+    similar_projects = {}
+    filteredRate={}
     
-    # try:
-    #     pass
+    try:
+        filteredProject = Project.objects.get(id=id)
+        similar_projects = Project.objects.filter(Category=filteredProject.Category).exclude(id=filteredProject.id)[:4]
+        filteredRate=Rating.objects.get(user_id=request.user.id,project_id=filteredProject.id)
     
-    # except Project.DoesNotExist:
-    #     raise Http404("Project does not exist")
-    # except Rating.DoesNotExist:
-    #     rating = None
+    except Project.DoesNotExist:
+        raise Http404("Project does not exist")
+    except Rating.DoesNotExist:
+        filteredRate = None
     print(filteredRate)
     commentForm=CommentForm()
     return render(request, 'proj/projectDetails.html', context={"project": filteredProject,"comment_form":commentForm,"rate":filteredRate,'similarProjects':similar_projects})
