@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect, reverse, render
 from django.views.generic import DetailView, UpdateView, DeleteView, TemplateView
 from django.views.generic.edit import  CreateView
 from django.contrib.auth.decorators import login_required
@@ -11,8 +11,10 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
+# from django.db.models.query_utils import Q
+# from .decorators import user_not_authenticated
 from .tokens import account_activation_token
-from .forms import AccountForm
+from .forms import AccountForm, SetPasswordForm, PasswordResetForm
 from .models import UserProfile
 
 
@@ -138,3 +140,20 @@ class ProfileDeleteView(LoginRequiredMixin, DeleteView):
         return self.request.user
 
 
+
+
+@login_required
+def password_change(request):
+    user = request.user
+    if request.method == 'POST':
+        form = SetPasswordForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your password has been changed")
+            return redirect('login')
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
+
+    form = SetPasswordForm(user)
+    return render(request, 'accounts/password_change_confirm.html', {'form': form})

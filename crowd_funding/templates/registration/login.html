@@ -6,6 +6,8 @@
         {% csrf_token %}
         {{form}}
         <button type="submit" class="btn btn-primary" style="margin-top: 20px; margin-bottom: 20px;">Submit</button>
+        <a href="{% url 'password_reset' %}">Forget Password!</a> <br>
+
     </form>
     <script src="{% static 'accounts/js/script.js'%}"></script>
 {% endblock content %}

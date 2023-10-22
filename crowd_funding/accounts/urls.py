@@ -1,6 +1,6 @@
 from django.urls import include
 from django.urls import path
-from accounts.views import AccountCreateView, ProfileDetailView, ProfileUpdateView, ProfileDeleteView,ActivationSuccessView, ActivationFailureView, ActivationRequiredView, profile, activate
+from accounts.views import AccountCreateView, ProfileDetailView, ProfileUpdateView, ProfileDeleteView,ActivationSuccessView, ActivationFailureView, ActivationRequiredView, profile, activate, password_change
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('register', AccountCreateView.as_view(), name='accounts.register'),
@@ -12,4 +12,6 @@ urlpatterns = [
     path('profile/view/', ProfileDetailView.as_view(), name='profile_view'),
     path('profile/edit/', ProfileUpdateView.as_view(), name='profile_edit'),
     path('profile/delete/', ProfileDeleteView.as_view(), name='profile_delete'),
+    path("password/change", password_change, name="password_change"),
+
 ]
