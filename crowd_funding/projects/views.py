@@ -128,7 +128,8 @@ def ViewProject(request,id):
         raise Http404("Project does not exist")
     except Rating.DoesNotExist:
         filteredRate = None
-    print(filteredRate)
+        
+    
     commentForm=CommentForm()
     return render(request, 'proj/projectDetails.html', context={"project": filteredProject,"comment_form":commentForm,"rate":filteredRate,'similarProjects':similar_projects})
  

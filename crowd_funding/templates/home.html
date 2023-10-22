@@ -112,7 +112,7 @@
             <div id="carouselHighest" style="height: 500px; width: 700px;" class="ms-5 mt-5 carousel slide"
                 data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    {% for pro in all_projects %}
+                    {% for pro in hightest_rated_projects %}
 
                     <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
                         <span onclick="window.location.href='{{ pro.get_show_url }}';"

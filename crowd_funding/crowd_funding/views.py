@@ -11,6 +11,8 @@ class HomePageView(TemplateView):
         context['all_projects'] = Project.objects.all()[:10]
         context['latest_projects'] = Project.objects.order_by('-created_at')[:5]
         context['featured_projects'] = Project.objects.filter(is_featured=True)[:5]
+        context['hightest_rated_projects'] = Project.objects.order_by('-average_rate')[:5]
+        
         
 
         return context  
