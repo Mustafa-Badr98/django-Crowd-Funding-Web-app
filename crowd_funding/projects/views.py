@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.contrib import messages
 from django_ratelimit.decorators import ratelimit
 from projects.models import Project, Comment, ReportedProject, ReportedComment ,Rating,Funding
-from .forms import FundingForm
+from .forms import FundingForm,ReportCommentForm, ReportProjectForm
 
 
 
@@ -56,46 +56,48 @@ def ViewProject(request,id):
  
  
  
+
 @login_required
-@ratelimit(key='user', rate='5/h', block=True)
 def report_project(request, project_id):
     project = get_object_or_404(Project, id=project_id)
 
-    if project.owner == request.user:
-        raise PermissionDenied("You cannot report your own project.")
-
     if request.method == 'POST':
-        reason = request.POST.get('reason', '')
+        form = ReportProjectForm(request.POST)
+        if form.is_valid():
+            reason = form.cleaned_data['reason']
 
-        # Check if the user has already reported this project
-        if ReportedProject.objects.filter(Q(user=request.user) & Q(project=project)).exists():
-            return HttpResponseBadRequest("You have already reported this project.")
+            # Create a ReportedProject instance
+            reported_project = ReportedProject.objects.create(user=request.user, project=project, reason=reason)
+            reported_project.save()
 
-        ReportedProject.objects.create(user=request.user, project=project, reason=reason)
+            messages.success(request, 'Project reported successfully.')
+            return redirect('projects.show', project_id=project.id)
+    else:
+        form = ReportProjectForm()
 
-    return render(request, 'report_project.html', {'project': project})
+    return render(request, 'proj/report_project.html', {'project': project, 'form': form})
 
 
 
 @login_required
-@ratelimit(key='user', rate='5/h', block=True)
 def report_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
 
-    # Check if the user is the author of the comment
-    if comment.user == request.user:
-        raise PermissionDenied("You cannot report your own comment.")
-
     if request.method == 'POST':
-        reason = request.POST.get('reason', '')
+        form = ReportCommentForm(request.POST)
+        if form.is_valid():
+            reason = form.cleaned_data['reason']
 
-        # Check if the user has already reported this comment
-        if ReportedComment.objects.filter(Q(user=request.user) & Q(comment=comment)).exists():
-            return HttpResponseBadRequest("You have already reported this comment.")
+            # Create a ReportedComment instance
+            reported_comment = ReportedComment.objects.create(user=request.user, comment=comment, reason=reason)
+            reported_comment.save()
 
-        ReportedComment.objects.create(user=request.user, comment=comment, reason=reason)
+            messages.success(request, 'Comment reported successfully.')
+            return redirect('projects.show', project_id=comment.project.id)
+    else:
+        form = ReportCommentForm()
 
-    return render(request, 'report_comment.html', {'comment': comment})
+    return render(request, 'proj/report_comment.html', {'comment': comment, 'report_comment_form': form})
 
 
 
