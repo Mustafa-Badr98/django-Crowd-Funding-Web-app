@@ -45,7 +45,7 @@ class Project(models.Model):
     title = models.CharField(max_length=100, unique=True)
     details = models.TextField(max_length=200, null=True, blank=True)
     Category=models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category', null=True, blank=True)
-    # owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='users', null=True, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users', null=True, blank=True)
     
     total_target=models.FloatField()
     current_fund=models.FloatField(default=0)
