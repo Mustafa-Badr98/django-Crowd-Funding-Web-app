@@ -180,19 +180,28 @@
                             {% endif %}
 
                         </div>
-                    {% endif %}
+                        {% endif %}
                     </div>
 
                 </div>
             </div>
-            <div class="row">
-                <ul>
+            <div class="row mt-3">
+                <form method="post" action="">
+                    {% csrf_token %}
+
+                    {% for field in comment_form %}
+                    {{ field.label_tag }} {{ field }}
+                    {% endfor %}
+
+                    <button class="btn btn-primary mt-2" type="submit">Submit</button>
+                </form>
+                <ul class="mt-5">
 
                     <span class="fs-5">comment section </span>
                     {% for comment in project.get_all_comments %}
                     <li>
                         <div class="bg-primary rounded mt-2 p-2">
-                            <span class="text-light"> user : {{comment.user }} commented:</span> 
+                            <span class="text-light"> user : {{comment.user }} commented:</span>
                             <div class="text-light">{{comment.comment_text}}</div>
                             <div class="row">
                                 <div class="offset-8 col-4">
@@ -204,6 +213,8 @@
 
                     {% endfor %}
                 </ul>
+
+
 
             </div>
 

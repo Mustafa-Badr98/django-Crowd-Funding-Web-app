@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.contrib import messages
 from django_ratelimit.decorators import ratelimit
 from projects.models import Project, Comment, ReportedProject, ReportedComment ,Rating,Funding
-from .forms import FundingForm,ReportCommentForm, ReportProjectForm
+from .forms import FundingForm,ReportCommentForm, ReportProjectForm,CommentForm
 
 
 
@@ -51,8 +51,8 @@ def searchProject(request):
 
 def ViewProject(request,id):  
     filteredProject = Project.objects.get(id=id)
-
-    return render(request, 'proj/projectDetails.html', context={"project": filteredProject,})
+    commentForm=CommentForm()
+    return render(request, 'proj/projectDetails.html', context={"project": filteredProject,"comment_form":commentForm})
  
  
  
