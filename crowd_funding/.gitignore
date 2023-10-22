@@ -1,12 +1,8 @@
-# Ignore compiled Python files
-*.pyc
 
+*.pyc
 __pycache__/
 
-# Ignore the virtual environment directory
 venv/
-
-# Ignore logs and databases
 logs/
 db.sqlite3
 

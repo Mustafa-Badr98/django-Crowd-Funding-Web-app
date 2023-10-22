@@ -187,3 +187,23 @@ class Comment(models.Model):
         
     def __str__(self):
         return f"{self.user} commented on  {self.project}"        
+    
+    
+
+
+class ReportedProject(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    reason = models.TextField()
+
+    def __str__(self):
+        return f"user : {self.user} Reported Project: {self.project.title}"
+
+class ReportedComment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    reason = models.TextField()
+
+    def __str__(self):
+        return f"User {self.user} Reported Comment: {self.comment.id}"
+    
