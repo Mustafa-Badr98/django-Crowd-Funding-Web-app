@@ -1,5 +1,6 @@
 from django import forms
 from projects.models import Rating,Project
+from projects.models import Rating,Funding,ReportedComment,ReportedProject,Comment
 
 class RatingForm(forms.ModelForm):
     class Meta:
@@ -10,5 +11,38 @@ class RatingForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-
         fields=['title', 'details', 'Category','total_target','start_date','end_date','current_fund','image1','image2','image3','image4','main_image']
+
+class ReportCommentForm(forms.ModelForm):
+    class Meta:
+        model = ReportedComment
+        fields = ['reason']
+
+class ReportProjectForm(forms.ModelForm):
+    class Meta:
+        model = ReportedProject
+        fields = ['reason']
+
+
+
+class FundingForm(forms.ModelForm):
+    class Meta:
+        model = Funding
+        fields = ['amount']
+        
+         
+        
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment_text']  
+        labels = {
+            'comment_text': 'Your Comment',  # Change 'Your Comment' to your desired label
+        }
+        widgets = {
+            'comment_text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your comment here',
+                'style': 'color: #333; font-size: 14px; padding: 10px; height: 60px'
+            }),
+        }

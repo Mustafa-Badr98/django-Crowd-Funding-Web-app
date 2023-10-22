@@ -13,13 +13,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 
-def get_image_path(instance, filename):
-
-    project_id = str(instance.id)
-    print(project_id)
-    base_filename, file_extension = os.path.splitext(filename)
-    return f'projects/images/project{project_id}/{base_filename}{file_extension}'
-
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -52,13 +45,8 @@ class Project(models.Model):
     title = models.CharField(max_length=100, unique=True)
     details = models.TextField(max_length=200, null=True, blank=True)
     Category=models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category', null=True, blank=True)
-    # owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='users', null=True, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users', null=True, blank=True)
     
-    image1=models.ImageField(upload_to=get_image_path, null=True, blank=True)
-    image2=models.ImageField(upload_to=get_image_path, null=True, blank=True)
-    image3=models.ImageField(upload_to=get_image_path, null=True, blank=True)
-    image4=models.ImageField(upload_to=get_image_path, null=True, blank=True)
-    main_image = models.ImageField(upload_to=get_image_path, null=True, blank=True)
     total_target=models.FloatField()
     current_fund=models.FloatField(default=0)
     num_of_ratings = models.PositiveIntegerField(default=0)
@@ -66,7 +54,11 @@ class Project(models.Model):
     average_rate = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)], default=0)
 
     is_featured = models.BooleanField(_("Is Featured"), default=False)
-    
+    image1=models.ImageField(upload_to="projects/images/", null=True, blank=True)
+    image2=models.ImageField(upload_to="projects/images/", null=True, blank=True)
+    image3=models.ImageField(upload_to="projects/images/", null=True, blank=True)
+    image4=models.ImageField(upload_to="projects/images/", null=True, blank=True)
+    main_image = models.ImageField(upload_to="projects/images/", null=True, blank=True)
     tag1 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
     tag2 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
     tag3 = models.CharField(max_length=50, choices=TAG_CHOICES, null=True, blank=True)
@@ -99,6 +91,20 @@ class Project(models.Model):
     def get_image4_url(self):
         return  f'/media/{self.image4}'
     
+    def get_all_imagesArray(self):
+        projectImages=[]
+        if(self.main_image):
+            projectImages.append(self.get_main_image_url)
+        if(self.image1):    
+            projectImages.append(self.get_image1_url)
+        if(self.image2):    
+            projectImages.append(self.get_image2_url)
+        if(self.image3):
+            projectImages.append(self.get_image3_url)
+        if(self.image4):
+            projectImages.append(self.get_image4_url)
+        return projectImages
+        
     def add_rate(self, new_rate):   
         self.rate += new_rate
         self.num_of_ratings += 1
@@ -183,3 +189,34 @@ class Comment(models.Model):
         
     def __str__(self):
         return f"{self.user} commented on  {self.project}"        
+    
+    
+
+
+class ReportedProject(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    reason = models.TextField()
+
+    def __str__(self):
+        return f"user : {self.user} Reported Project: {self.project.title}"
+
+class ReportedComment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    reason = models.TextField()
+
+    def __str__(self):
+        return f"User {self.user} Reported Comment: {self.comment.id}"
+    
+    
+    
+
+class Funding(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    amount = models.FloatField()
+    transaction_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} funded {self.project.title} - {self.amount}"    
