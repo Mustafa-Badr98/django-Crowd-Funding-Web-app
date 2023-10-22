@@ -6,7 +6,7 @@ from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.contrib import messages
 from django_ratelimit.decorators import ratelimit
-from projects.models import Project, Comment, ReportedProject, ReportedComment ,Rating
+from projects.models import Project, Comment, ReportedProject, ReportedComment ,Rating,Funding
 from .forms import FundingForm
 
 
