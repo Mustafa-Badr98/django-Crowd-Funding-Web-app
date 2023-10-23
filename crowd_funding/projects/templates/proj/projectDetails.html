@@ -72,6 +72,10 @@
                 <span class="fs-5"> Funding Target {{ project.total_target }}
                     $</span>
             </div>
+            <div class="row py-0">
+                <span class="fs-5"> Funding reached {{ project.current_fund }}
+                    $</span>
+            </div>
             <div class="row py-0 mt-3 ">
                 <div class="col-6">
                     <div>
@@ -273,14 +277,14 @@
                                 {% if comment.user_id == user.id %}
                                 <div class="offset-8 col-4 "> <a class="btn btn-danger fs-6" href="">Delete</a></div>
 
-                                
+
                                 {% else %}
 
                                 <div class="offset-8 col-4">
                                     <a class="text-light btn btn-dark fs-6"> report </a>
                                 </div>
                                 {% endif %}
-                                
+
                             </div>
                         </div>
                     </li>
