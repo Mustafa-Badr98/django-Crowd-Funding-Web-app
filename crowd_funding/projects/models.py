@@ -191,8 +191,8 @@ class Comment(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE,related_name='comments')
     comment_text = models.TextField()
     
-    class Meta:
-        unique_together = ('user', 'project')    
+    # class Meta:
+    #     unique_together = ('user', 'project')    
         
         
     def __str__(self):

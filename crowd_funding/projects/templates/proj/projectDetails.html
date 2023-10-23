@@ -265,14 +265,22 @@
                     <span class="fs-5">comment section </span>
                     {% for comment in project.get_all_comments %}
                     <li>
-                        <div class="bg-primary rounded mt-2 p-2">
+                        <div style="background-color:silver" class="rounded mt-2 p-2">
                             <span class="text-light"><span class="text-dark fs-5"> {{comment.user }} </span>
                                 commented:</span>
                             <div class="text-light">{{comment.comment_text}}</div>
                             <div class="row">
+                                {% if comment.user_id == user.id %}
+                                <div class="offset-8 col-4 "> <a class="btn btn-danger fs-6" href="">Delete</a></div>
+
+                                
+                                {% else %}
+
                                 <div class="offset-8 col-4">
-                                    <a class="text-light"> report </a>
+                                    <a class="text-light btn btn-dark fs-6"> report </a>
                                 </div>
+                                {% endif %}
+                                
                             </div>
                         </div>
                     </li>
