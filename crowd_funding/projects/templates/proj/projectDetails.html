@@ -230,11 +230,15 @@
                         </div>
                         {% else %}
                         <div class="col-6">
-                            <div class="input-group mb-3" style="max-width: 110px;">
-                                <input type="number" class="form-control" name="funds" id="" min="0" max="50000">
-                            </div>
-                            <a href='{{product.get_show_url}}' style="cursor: pointer;" class="btn btn-danger">Give a
-                                Fund </a>
+                            <form action="{% url 'project_add_fund' project.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="input-group mb-3" style="max-width: 110px;">
+                                    <input type="number" class="form-control" name="funds" id="" min="0" max="50000">
+                                </div>
+                                <button class="btn btn-dark" type="submit">Fund</button>
+                            </form>
+
+                            
 
                         </div>
                         <div class="col-6">

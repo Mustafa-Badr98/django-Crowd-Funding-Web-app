@@ -25,10 +25,14 @@ class ReportProjectForm(forms.ModelForm):
 
 
 
-class FundingForm(forms.ModelForm):
-    class Meta:
-        model = Funding
-        fields = ['amount']
+# class FundingForm(forms.ModelForm):
+#     class Meta:
+#         model = Funding
+#         fields = ['amount']
+       
+
+        
+        
         
          
         
@@ -37,7 +41,7 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['comment_text']  
         labels = {
-            'comment_text': 'Your Comment',  # Change 'Your Comment' to your desired label
+            'comment_text': 'Your Comment',
         }
         widgets = {
             'comment_text': forms.Textarea(attrs={

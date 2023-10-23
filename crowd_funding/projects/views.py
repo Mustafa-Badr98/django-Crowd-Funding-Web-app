@@ -13,7 +13,7 @@ from django.contrib import messages
 from django_ratelimit.decorators import ratelimit
 from django.urls import reverse 
 from projects.models import Project, Comment, ReportedProject, ReportedComment ,Rating,Funding
-from .forms import FundingForm,ReportCommentForm, ReportProjectForm,CommentForm
+from .forms import ReportCommentForm, ReportProjectForm,CommentForm
 from django.http import Http404
 
 
@@ -131,7 +131,12 @@ def ViewProject(request,id):
         
     
     commentForm=CommentForm()
-    return render(request, 'proj/projectDetails.html', context={"project": filteredProject,"comment_form":commentForm,"rate":filteredRate,'similarProjects':similar_projects})
+    
+    return render(request, 'proj/projectDetails.html', context={"project": filteredProject,
+                                                                "comment_form":commentForm,
+                                                                "rate":filteredRate,
+                                                                'similarProjects':similar_projects,
+                                                               })
  
  
  
@@ -189,20 +194,18 @@ def fund_project(request, project_id):
     project = get_object_or_404(Project, id=project_id)
 
     if request.method == 'POST':
-        form = FundingForm(request.POST)
-        if form.is_valid():
-            amount = form.cleaned_data['amount']
 
-            # Create a funding record
+            amount = int(request.POST.get('funds'))
+            print(amount)
+
             funding = Funding.objects.create(user=request.user, project=project, amount=amount)
-
-            # Update the current_fund of the project
+            
             project.current_fund += amount
             project.save()
 
             messages.success(request, f'Thank you for funding {project.title}!')
-            return redirect('project_detail', project_id=project.id)
-    else:
-        form = FundingForm()
+            url = reverse('projects.show',args=[project_id])
+            return redirect(url, project_id=project_id)
 
-    return render(request, 'fund_project.html', {'project': project, 'form': form})
+
+
