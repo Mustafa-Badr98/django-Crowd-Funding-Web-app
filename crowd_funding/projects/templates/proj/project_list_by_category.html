@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+
+
+{% block content %}
+
+
+<div class="container mt-5">
+    <h1 class="pb-5">All projects in the category : {{category.name}} </h1>
+    <div class="row">
+        {% for Project in projects  %}
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <img src="{{Project.get_main_image_url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{Project.title}}</h5>
+                    <p class="card-text">{{Project.details}}</p>
+                    <a href="{{Project.get_show_url}}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock content %}

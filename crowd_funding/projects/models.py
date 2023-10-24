@@ -23,10 +23,16 @@ class Category(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+    
+    def category_show_url(self):
+        return  reverse('category.show',args=[self.id])
 
     @classmethod
     def get_all_objects(cls):
         return cls.objects.all()
+    
+    
+
               
 class Project(models.Model):
     HOT = 'Hot'

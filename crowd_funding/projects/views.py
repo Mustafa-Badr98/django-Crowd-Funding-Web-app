@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Project, Rating
-from .forms import RatingForm ,ProjectForm
+from .models import Project, Rating,Category
+from .forms import  ProjectForm
+from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import RatingForm
@@ -12,7 +13,7 @@ from django.db.models import Q
 from django.contrib import messages
 from django_ratelimit.decorators import ratelimit
 from django.urls import reverse 
-from projects.models import Project, Comment, ReportedProject, ReportedComment ,Rating,Funding
+from projects.models import Project, Comment, ReportedProject, ReportedComment ,Rating,Funding,Category
 from .forms import ReportCommentForm, ReportProjectForm,CommentForm
 from django.http import Http404
 
@@ -111,9 +112,6 @@ def searchProject(request):
     return render(request, "proj/search_project_page.html", context={"projectsList": searchedProject, "searchedWord": searchedWord})
 
 
-
-
-
 def ViewProject(request,id):  
     filteredProject = {}
     similar_projects = {}
@@ -123,13 +121,13 @@ def ViewProject(request,id):
         filteredProject = Project.objects.get(id=id)
         similar_projects = Project.objects.filter(Category=filteredProject.Category).exclude(id=filteredProject.id)[:4]
         filteredRate=Rating.objects.get(user_id=request.user.id,project_id=filteredProject.id)
+        
     
     except Project.DoesNotExist:
         raise Http404("Project does not exist")
     except Rating.DoesNotExist:
         filteredRate = None
-        
-    
+  
     commentForm=CommentForm()
     
     return render(request, 'proj/projectDetails.html', context={"project": filteredProject,
@@ -140,6 +138,22 @@ def ViewProject(request,id):
  
  
  
+class CategoryProjectsListView(ListView):
+    model = Project
+    template_name = 'proj/project_list_by_category.html' 
+    context_object_name = 'projects'
+
+    def get_queryset(self):
+        category_id = self.kwargs['category_id']
+        return Project.objects.filter(Category_id=category_id) 
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs['category_id']
+        context['category'] = get_object_or_404(Category, id=category_id)
+        return context
+
+
 
 @login_required
 def report_project(request, project_id):

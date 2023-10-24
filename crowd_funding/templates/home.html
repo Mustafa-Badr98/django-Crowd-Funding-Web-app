@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block content %} <h1> Home Page </h1>
+{% block content %} 
 {% endblock content %}
 
 {% block landingSection %}
@@ -8,8 +8,23 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="offset-4 col-4">
+    <div class="row mt-5">
+        <div class="offset-2 col-3">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Browse By Category
+                </button>
+                <ul class="dropdown-menu">
+                    {% for category in categories  %}
+                    <li><a class="dropdown-item" href="{{category.category_show_url}}">{{category.name}}</a></li>
+                    
+                    {% endfor %}
+                   
+                </ul>
+            </div>
+        </div>
+        <div class="col-4">
             <form class="d-flex mb-5" action="{% url 'project.search' %}" method="get">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=""
                     name="searchedWord" />
@@ -30,8 +45,7 @@
                     {% for pro in featured_projects %}
 
                     <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
-                        <span onclick="window.location.href='{{ pro.get_show_url }}';"
-                            style="cursor: pointer;">
+                        <span onclick="window.location.href='{{ pro.get_show_url }}';" style="cursor: pointer;">
                             <span class="text-danger fs-6">{{pro.title}}</span>
                             <span class="ms-1 text-danger fs-6">By {{pro.owner}}</span>
                             <span class="ms-5 text-danger fs-6">Goal funds : {{pro.total_target}}</span>
@@ -72,8 +86,7 @@
                     {% for pro in latest_projects %}
 
                     <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
-                        <span onclick="window.location.href='{{ pro.get_show_url }}';"
-                            style="cursor: pointer;">
+                        <span onclick="window.location.href='{{ pro.get_show_url }}';" style="cursor: pointer;">
                             <span class="text-danger fs-6">{{pro.title}}</span>
                             <span class="ms-1 text-danger fs-6">By {{pro.owner}}</span>
                             <span class="ms-5 text-danger fs-6">Goal funds : {{pro.total_target}}</span>
@@ -115,8 +128,7 @@
                     {% for pro in hightest_rated_projects %}
 
                     <div style="" class="carousel-item {% if forloop.counter0  == 0 %} active {% endif %}">
-                        <span onclick="window.location.href='{{ pro.get_show_url }}';"
-                            style="cursor: pointer;">
+                        <span onclick="window.location.href='{{ pro.get_show_url }}';" style="cursor: pointer;">
                             <span class="text-danger fs-6">{{pro.title}}</span>
                             <span class="ms-1 text-danger fs-6">By {{pro.owner}}</span>
                             <span class="ms-5 text-danger fs-6">Goal funds : {{pro.total_target}}</span>
