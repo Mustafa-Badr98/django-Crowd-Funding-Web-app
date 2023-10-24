@@ -79,7 +79,7 @@
             <div class="row py-0 mt-3 ">
                 <div class="col-6">
                     <div>
-                        <span >Rate : </span>
+                        <span>Rate : </span>
                         <span class="badge bg-secondary">{{project.average_rate}}</span>
                         <span class="ms-5">
                             <span class="dropdown ">
@@ -322,9 +322,22 @@
                     <div class="card" style="width: 18rem;">
                         <img src="{{simProject.get_main_image_url}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">{{simProject.title}}</h5>
+                            <div class="row">
+                                <span class="card-title fs-6 col-8 fw-bold">{{simProject.title}}</span>
+                                <span style="font-size:15px;background-color: chocolate;" class="badge col-4">Rate:
+                                    {{simProject.average_rate}}</span>
+                            </div>
+
                             <p class="card-text">{{simProject.details}}</p>
-                            <a href="{{simProject.get_show_url}}" class="btn btn-primary">View</a>
+                            <div class="row">
+                                <div class="col-8">
+                                    <span style="font-size:15px" class="fw-bold">Goal Fund:
+                                        {{simProject.total_target}}</span>
+
+                                </div>
+                                <a href="{{simProject.get_show_url}}" class="btn btn-primary col-4">View</a>
+
+                            </div>
                         </div>
                     </div>
                 </div>
