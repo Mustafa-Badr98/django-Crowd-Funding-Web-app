@@ -115,6 +115,19 @@ class Project(models.Model):
         if(self.image4):
             projectImages.append(self.get_image4_url)
         return projectImages
+    
+    
+    def get_all_tags(self):
+        projectTags=[]
+        if(self.tag1):
+            projectTags.append(self.tag1)
+        if(self.tag2):    
+            projectTags.append(self.tag2)
+        if(self.tag3):    
+            projectTags.append(self.tag3)
+        if(self.tag4):
+            projectTags.append(self.tag4)
+        return projectTags
         
     def add_rate(self, new_rate):   
         self.total_rate += new_rate
