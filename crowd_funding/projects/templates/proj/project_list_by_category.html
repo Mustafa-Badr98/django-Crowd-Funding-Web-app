@@ -9,18 +9,31 @@
 <div class="container mt-5">
     <h1 class="pb-5">All projects in the category : {{category.name}} </h1>
     <div class="row">
-        {% for Project in projects  %}
-        <div class="col-3">
-            <div class="card" style="width: 18rem;">
-                <img src="{{Project.get_main_image_url}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{Project.title}}</h5>
-                    <p class="card-text">{{Project.details}}</p>
-                    <a href="{{Project.get_show_url}}" class="btn btn-primary">View</a>
+        {% for project in projects  %}
+                <div class="col-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{project.get_main_image_url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <div class="row">
+                                <span class="card-title fs-6 col-8 fw-bold">{{project.title}}</span>
+                                <span style="font-size:15px;background-color: chocolate;" class="badge col-4">Rate:
+                                    {{project.average_rate}}</span>
+                            </div>
+
+                            <p class="card-text">{{project.details}}</p>
+                            <div class="row">
+                                <div class="col-8">
+                                    <span style="font-size:15px" class="fw-bold">Goal Fund:
+                                        {{project.total_target}}</span>
+
+                                </div>
+                                <a href="{{project.get_show_url}}" class="btn btn-primary col-4">View</a>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        {% endfor %}
+                {% endfor %}
 
     </div>
 
