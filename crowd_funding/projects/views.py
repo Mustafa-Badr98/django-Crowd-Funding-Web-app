@@ -119,7 +119,14 @@ def ViewProject(request,id):
     
     try:
         filteredProject = Project.objects.get(id=id)
-        similar_projects = Project.objects.filter(Category=filteredProject.Category).exclude(id=filteredProject.id)[:4]
+        # similar_projects = Project.objects.filter(Category=filteredProject.Category).exclude(id=filteredProject.id)[:4]
+        
+        
+        tags = [filteredProject.tag1, filteredProject.tag2, filteredProject.tag3, filteredProject.tag4]
+        similar_projects = Project.objects.filter(
+            Q(tag1__in=tags) | Q(tag2__in=tags) | Q(tag3__in=tags) | Q(tag4__in=tags)
+        ).exclude(id=filteredProject.id).order_by('?')[:4]
+        
         filteredRate=Rating.objects.get(user_id=request.user.id,project_id=filteredProject.id)
         
     
