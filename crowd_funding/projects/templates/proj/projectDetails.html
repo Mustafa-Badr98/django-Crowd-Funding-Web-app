@@ -79,8 +79,8 @@
             <div class="row py-0 mt-3 ">
                 <div class="col-6">
                     <div>
-                        <span>Rate : </span>
-                        <span>{{project.average_rate}}</span>
+                        <span >Rate : </span>
+                        <span class="badge bg-secondary">{{project.average_rate}}</span>
                         <span class="ms-5">
                             <span class="dropdown ">
                                 <button style="color:chocolate ;" class="btn dropdown-toggle" type="button"
@@ -147,15 +147,18 @@
                         </span>
 
                     </div>
-
-
-
-
-
                     <div class="mt-2">
 
                         <span>Category : </span>
-                        <span>{{ project.Category }} </span>
+                        <span class="badge bg-secondary">{{ project.Category }} </span>
+                    </div>
+                    <div class="mt-2">
+                        <span>Tags : </span>
+                        {% for tag in project.get_all_tags %}
+
+                        <span class="badge bg-danger">{{tag}}</span>
+
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="col-6">
