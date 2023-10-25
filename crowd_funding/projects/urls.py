@@ -12,7 +12,7 @@ urlpatterns=[
     path('fund/<int:project_id>', fund_project,name='project_add_fund'),
     path('viewCategory/<int:category_id>', CategoryProjectsListView.as_view(),name='category.show'),
     path('cancel/<int:id>', cancel_project, name='projects.cancel'),
-    path('report/<int:id>', cancel_project, name='projects.report'),
+    path('report/<int:id>',report_project, name='projects.report'),
 
 ]
 

@@ -189,7 +189,7 @@ def report_project(request, id):
             report.user = request.user
             report.save()
             url = reverse('projects.show', args=[id])
-            return url
+            return redirect( url)
 
     return render(request, 'proj/report_project.html', {'form': form, 'project': project})
 
