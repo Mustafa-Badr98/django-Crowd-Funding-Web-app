@@ -197,8 +197,8 @@ def report_project(request, id):
 @login_required
 def report_comment(request, comment_id,project_id):
     project=get_object_or_404(Project,id=project_id)
-    comment = get_object_or_404(Project, id=comment_id)
-    form = ReportCommentForm
+    comment = get_object_or_404(Comment, id=comment_id)
+    form = ReportCommentForm()
 
     if request.method == 'POST':
         form = ReportCommentForm(request.POST, request.FILES)
@@ -208,10 +208,10 @@ def report_comment(request, comment_id,project_id):
             report.comment = comment
             report.user = request.user
             report.save()
-            url = reverse('projects.show', args=[id])
+            url = reverse('projects.show', args=[project_id])
             return redirect(url)
 
-    return render(request, 'proj/report_comment.html', {'form': form, 'project': comment})
+    return render(request, 'proj/report_comment.html', {'form': form, 'comment': comment})
 
 
 
