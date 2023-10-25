@@ -195,24 +195,25 @@ def report_project(request, id):
 
 
 @login_required
-def report_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id)
+def report_comment(request, comment_id,project_id):
+    project=get_object_or_404(Project,id=project_id)
+    comment = get_object_or_404(Project, id=comment_id)
+    form = ReportCommentForm
 
     if request.method == 'POST':
-        form = ReportCommentForm(request.POST)
+        form = ReportCommentForm(request.POST, request.FILES)
         if form.is_valid():
-            reason = form.cleaned_data['reason']
+            report = form.save(commit=False)
+            report.project=project
+            report.comment = comment
+            report.user = request.user
+            report.save()
+            url = reverse('projects.show', args=[id])
+            return redirect(url)
 
-            # Create a ReportedComment instance
-            reported_comment = ReportedComment.objects.create(user=request.user, comment=comment, reason=reason)
-            reported_comment.save()
+    return render(request, 'proj/report_comment.html', {'form': form, 'project': comment})
 
-            messages.success(request, 'Comment reported successfully.')
-            return redirect('projects.show', project_id=comment.project.id)
-    else:
-        form = ReportCommentForm()
 
-    return render(request, 'proj/report_comment.html', {'comment': comment, 'report_comment_form': form})
 
 
 

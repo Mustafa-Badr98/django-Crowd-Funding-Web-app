@@ -269,6 +269,7 @@
             <div class="row mt-3">
                 {% if project.owner_id == user.id %}
 
+
                 {% else %}
                 <form method="post" action="{% url 'add_comment' project.id %}">
                     {% csrf_token %}
@@ -299,8 +300,9 @@
                                 {% else %}
 
                                 <div class="offset-8 col-4">
-{#                                    <a class="text-light btn btn-dark fs-6"> report </a>#}
-{#
+
+                                <a class="text-light btn btn-dark fs-6"> report </a>
+
 
                                 </div>
                                 {% endif %}
