@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} cancel project  {% endblock %}
+{% block content %}
+
+
+{% endblock %}
+
+
+{% block landingSection %}
+
+<div class="container">
+  <div class="row-4 mt-5 text-center">
+    <div class="col">
+          <h3 class="text-center-danger mb-5">Cancel project </h3>
+    <form method="post" enctype="multipart/form-data" class="my-4">
+  {% csrf_token %}
+
+
+  <button type="submit" class="btn btn-danger">Cancel</button>
+   <a href="{% url 'home' %}" class="btn btn-secondary">Donot Cancel</a>
+</form>
+    </div>
+
+  </div>
+<script src="{% static 'bootstrap/js/script.js'%}"></script>
+</div>
+{% endblock landingSection %}
