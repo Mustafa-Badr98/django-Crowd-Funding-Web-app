@@ -229,9 +229,11 @@
                             <a href="" class="btn btn-primary">Edit your project</a>
                         </div>
                         <div class="row-4 mt-3">
-                            <button class="btn btn-danger">
-                                Delete your Project
-                            </button>
+{#                            <button class="btn btn-danger">#}
+{#                                Delete your Project#}
+{#                            </button>#}
+                                                <a href="{% url 'projects.cancel' project.id %}" class="btn btn-danger">Cancel</a>
+
                         </div>
                         {% else %}
                         <div class="col-6">
