@@ -176,27 +176,22 @@ class CategoryProjectsListView(ListView):
         return context
 
 
-
 @login_required
-def report_project(request, project_id):
-    project = get_object_or_404(Project, id=project_id)
+def report_project(request, id):
+    project = get_object_or_404(Project, id=id)
+    form = ReportProjectForm()
 
     if request.method == 'POST':
-        form = ReportProjectForm(request.POST)
+        form = ReportProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            reason = form.cleaned_data['reason']
+            report = form.save(commit=False)
+            report.project = project
+            report.user = request.user
+            report.save()
+            url = reverse('projects.show', args=[id])
+            return url
 
-            # Create a ReportedProject instance
-            reported_project = ReportedProject.objects.create(user=request.user, project=project, reason=reason)
-            reported_project.save()
-
-            messages.success(request, 'Project reported successfully.')
-            return redirect('projects.show', project_id=project.id)
-    else:
-        form = ReportProjectForm()
-
-    return render(request, 'proj/report_project.html', {'project': project, 'form': form})
-
+    return render(request, 'proj/report_project.html', {'form': form, 'project': project})
 
 
 @login_required
