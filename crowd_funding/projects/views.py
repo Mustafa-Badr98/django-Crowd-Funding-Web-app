@@ -54,6 +54,8 @@ def cancel_project(request, id):
         if project.current_fund < fund_percentage:
             if project.owner == request.user:
                 project.delete()
+    if project.current_fund >= fund_percentage:
+        return render(request, 'projects/failure_cancel.html', {'project': project})
 
     return render(request, 'projects/cancel.html', {'project': project})
 
