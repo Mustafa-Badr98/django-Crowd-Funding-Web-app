@@ -300,7 +300,9 @@
                                 {% else %}
 
                                 <div class="offset-8 col-4">
-                                    <a class="text-light btn btn-dark fs-6"> report </a>
+{#                                    <a class="text-light btn btn-dark fs-6"> report </a>#}
+                                    <a class="btn btn-danger" href="{% if user.id %}{% url 'projects.report' project.id %}{% endif %}">Report</a>
+
                                 </div>
                                 {% endif %}
 
