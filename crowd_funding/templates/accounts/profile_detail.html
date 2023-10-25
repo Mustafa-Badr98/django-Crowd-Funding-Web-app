@@ -1,25 +1,36 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <h1 class="text-center m-3"> Your Profile Info </h1>
+    <h1 class="text-center m-3 text-primary"> Your Profile Info </h1>
     <form method="post" enctype="multipart/form-data" style="margin-left: 50px;">
         {% csrf_token %}
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h4 class="text-danger">User Name:</h4>
-                    <p>{{user.username}}</p>
-                    <h4 class="text-danger">First Name:</h4>
-                    <p>{{user.first_name}}</p>
-                    <h4 class="text-danger">Last Name:</h4>
-                    <p>{{user.last_name}}</p>
-                    <h4 class="text-danger">E-mail Address:</h4>
-                    <p>{{user.email}}</p>
-                    <h4 class="text-danger">Phone:</h4>
-                    <p>{{user.phone_number}}</p>
+        <div class="container w-50 text-center" style="box-shadow: 0px 0px 10px 4px lightblue;">
+            <div class="row p-2">
+                <div class="col-lg-4">
+                    <img src= '{{user.get_image_url}}' width="200px" height="200px" class="rounded-circle">
                 </div>
-                <div class="col-lg-6">
-                    <img src= '{{user.get_image_url}}' width="300px" height="300px" class="rounded-circle">
+                <div class="col-lg-8 mt-2">
+                    <h1 class="m-3 ">{{user.username}}</h1>
+                    <p style="font-size: larger;">First Name: {{user.first_name}}</p>                    
+
+                    <p  style="font-size: larger;">Last Name: {{user.last_name}}</p>
+                </div>
+                <div class="row my-2">
+                    <div class="col-lg-6">
+                        <h4>Phone:</h4>
+                        <p>{{user.phone_number}}</p>
+                        <h4>Birth Date:</h4>
+                        <p>{{user.birth_date}}</p>
+                        <h4>E-mail Address:</h4>
+                        <p>{{user.email}}</p>
+
+                    </div>
+                    <div class="col-lg-6">
+                    <h4>Facebook :</h4>
+                    <p>{{user.facebook_profile}}</p>
+                    <h4>Country:</h4>
+                    <p>{{user.country}}</p>
+                </div>
                 </div>
             </div>
         </div>
