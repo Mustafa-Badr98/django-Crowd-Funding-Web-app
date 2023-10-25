@@ -193,6 +193,9 @@ class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE,related_name='ratings')
     rate_value = models.IntegerField(choices=RateValue.choices,default=1)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         unique_together = ('user', 'project') 
@@ -209,6 +212,9 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE,related_name='comments')
     comment_text = models.TextField()
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     # class Meta:
     #     unique_together = ('user', 'project')    
@@ -231,6 +237,9 @@ class ReportedComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     reason = models.TextField()
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"User {self.user} Reported Comment: {self.comment.id}"
@@ -243,6 +252,9 @@ class Funding(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     amount = models.FloatField()
     transaction_date = models.DateTimeField(auto_now_add=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.user.username} funded {self.project.title} - {self.amount}"    
