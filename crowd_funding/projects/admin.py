@@ -23,33 +23,33 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Rating)
 class RatingAdmin(admin.ModelAdmin):
-    list_display = ('user', 'project', 'rate_value')
+    list_display = ('user', 'project', 'rate_value', 'created_at', 'updated_at')
     search_fields = ('user__email', 'project__title')
     ordering = ('-project__created_at',)
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'project', 'comment_text')
+    list_display = ('user', 'project', 'comment_text', 'created_at', 'updated_at')
     search_fields = ('user__email', 'project__title')
     ordering = ('-project__created_at',)
 
 
 @admin.register(ReportedProject)
 class ReportedProjectAdmin(admin.ModelAdmin):
-    list_display = ('user', 'project', 'reason')
+    list_display = ('user', 'project', 'reason', 'created_at', 'updated_at')
     search_fields = ('user__email', 'project__title')
     ordering = ('-project__created_at',)
 
 @admin.register(ReportedComment)
 class ReportedCommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'comment', 'reason')
+    list_display = ('user', 'comment', 'reason', 'created_at', 'updated_at')
     search_fields = ('user__email', 'comment__project__title')
     ordering = ('-comment__project__created_at',)
 
 
 @admin.register(Funding)
 class FundingAdmin(admin.ModelAdmin):
-    list_display = ('user', 'project', 'amount', 'transaction_date')
+    list_display = ('user', 'project', 'amount', 'transaction_date', 'updated_at')
     search_fields = ('user__email', 'project__title')
     ordering = ('-project__created_at',)
