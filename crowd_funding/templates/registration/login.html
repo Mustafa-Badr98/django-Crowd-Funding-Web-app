@@ -8,6 +8,9 @@
         <button type="submit" class="btn btn-primary" style="margin-top: 20px; margin-bottom: 20px;">Submit</button>
         <a href="{% url 'password_reset' %}">Forget Password!</a> <br>
 
+        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-facebook btn-user btn-block"> Login with Facebook</a>
+
+
     </form>
     <script src="{% static 'accounts/js/script.js'%}"></script>
 {% endblock content %}
