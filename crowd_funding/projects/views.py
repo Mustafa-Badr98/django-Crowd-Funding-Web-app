@@ -24,7 +24,7 @@ def create_project(request):
         if form.is_valid():
             project = form.save(commit=False)
             project.owner = request.user
-            project.tag1='NEW'
+            project.tag1 = 'NEW'
             form.save()
             return redirect('home')
     else:
@@ -55,6 +55,9 @@ def cancel_project(request, id):
         if project.current_fund < fund_percentage:
             if project.owner == request.user:
                 project.delete()
+                return redirect('home')
+
+
 
     if project.current_fund >= fund_percentage:
         return render(request, 'projects/failure_cancel.html', {'project': project})
