@@ -43,7 +43,19 @@ def edit_project(request,id):
             return redirect('home')
         
     return render(request, 'projects/edit.html', {'form':form})
-          
+
+
+@login_required
+def cancel_project(request, id):
+    project = get_object_or_404(Project, id=id)
+    fund_percentage = project.total_target * .25
+    if request.method == 'POST':
+
+        if project.current_fund < fund_percentage:
+            if project.owner == request.user:
+                project.delete()
+
+    return render(request, 'projects/cancel.html', {'project': project})
 
 
 @login_required
