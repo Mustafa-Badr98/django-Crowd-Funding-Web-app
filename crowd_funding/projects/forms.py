@@ -17,6 +17,7 @@ class ReportCommentForm(forms.ModelForm):
     class Meta:
         model = ReportedComment
         fields = ['reason']
+        labels = {'reason': 'Submit Your Report on Comment'}
 
 class ReportProjectForm(forms.ModelForm):
     class Meta:
