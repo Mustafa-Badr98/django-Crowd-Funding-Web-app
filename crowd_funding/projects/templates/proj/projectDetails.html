@@ -226,7 +226,9 @@
                     <div class="row mt-4 ">
                         {% if project.owner.id == user.id %}
                         <div class="row-5">
-                            <a href="" class="btn btn-primary">Edit your project</a>
+                            {% comment %}edit project{% endcomment %}
+
+                        <a href="{% url 'projects.edit' project.id %}" class="btn btn-secondary">Edit</a>
                         </div>
                         <div class="row-4 mt-3">
 {#                            <button class="btn btn-danger">#}
