@@ -121,7 +121,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
     template_name = 'accounts/profile_form.html'
-    fields = ['username', 'first_name', 'last_name', 'phone_number', 'image']
+    fields = ['username', 'first_name', 'last_name', 'phone_number', 'image', 'birth_date', 'facebook_profile', 'country']
 
     def get_object(self, queryset=None):
         return self.request.user

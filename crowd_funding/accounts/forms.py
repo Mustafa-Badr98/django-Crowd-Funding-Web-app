@@ -14,7 +14,7 @@ class AccountForm(UserCreationForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['bio', 'username', 'first_name', 'last_name', 'email', 'phone_number', 'image']
+        fields = ['bio', 'username', 'first_name', 'last_name', 'email', 'phone_number', 'image', 'birth_date', 'facebook_profile', 'country']
 
 
 class SetPasswordForm(SetPasswordForm):
