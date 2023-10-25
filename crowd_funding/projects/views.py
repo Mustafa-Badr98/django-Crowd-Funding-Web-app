@@ -40,7 +40,8 @@ def edit_project(request,id):
         form=ProjectForm(request.POST, request.FILES,instance=project)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            url = reverse('projects.show', args=[id])
+            return redirect(url)
         
     return render(request, 'projects/edit.html', {'form':form})
 
