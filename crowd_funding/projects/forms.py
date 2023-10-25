@@ -22,6 +22,7 @@ class ReportProjectForm(forms.ModelForm):
     class Meta:
         model = ReportedProject
         fields = ['reason']
+        labels={'reason':'Submit Your Report'}
 
 
 
