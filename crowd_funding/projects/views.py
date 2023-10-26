@@ -81,16 +81,14 @@ def add_rating_view2(request, project_id):
             project.add_rate(rating.rate_value)
 
         if 'editRate' in request.POST:
-            print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj")
+          
             edited_rate = Rating.objects.get(user_id=request.user.id, project_id=project_id)
             old_rate = edited_rate.rate_value
             new_rate = int(request.POST.get('stars'))
             edited_rate.rate_value = new_rate
             edited_rate.save()
             project.edit_rate(new_rate, old_rate)
-            # print(old_rate)
-            # print(new_rate)
-            # print(edited_rate.rate_value)
+
 
         url = reverse('projects.show', args=[project_id])
         return redirect(url, project_id=project_id)

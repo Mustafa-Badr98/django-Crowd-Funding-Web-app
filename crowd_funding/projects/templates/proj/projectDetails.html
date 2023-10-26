@@ -3,9 +3,10 @@
 {% load static %}
 {% block links %}
 <link rel="stylesheet" href="{% static 'projectDetails.css' %}">
-<link rel="stylesheet" href={% static 'bootstrap/css/bootstrap.css' %}>
-<script src="{% static 'projectDetails.js' %}"></script>
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{% static 'projectDetails.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock %}
 {% block content %}
 
@@ -81,11 +82,12 @@
                     <div>
                         <span>Rate : </span>
                         <span class="badge bg-secondary">{{project.average_rate}}</span>
+                        <span>({{project.num_of_ratings}})</span>
                         <span class="ms-5">
                             <span class="dropdown ">
                                 <button style="color:chocolate ;" class="btn dropdown-toggle" type="button"
                                     data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                    Rate it
+                                    {% if rate %} Change Rate   {% else %} Rate it {% endif %}
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
@@ -128,12 +130,12 @@
                                             </div>
                                             {% if rate %}
                                             <div class="offset-1 col-11" id="editRating">
-                                                <button class="btn btn-primary" name='editRate' type="submit">edit rate
+                                                <button class="btn btn-primary" name='editRate' type="submit">Edit rate
                                                 </button>
                                             </div>
                                             {% else %}
                                             <div class="offset-1 col-11" id="submitRating">
-                                                <button class="btn btn-primary" name='submitRate' type="submit">submit
+                                                <button class="btn btn-primary" name='submitRate' type="submit">Submit
                                                     rate
                                                 </button>
                                             </div>
@@ -294,7 +296,7 @@
                             <div class="text-light">{{comment.comment_text}}</div>
                             <div class="row">
                                 {% if comment.user_id == user.id %}
-                                <div class="offset-8 col-4 "> <a class="btn btn-danger fs-6" href="">Delete</a></div>
+                                {% comment %} <div class="offset-8 col-4 "> <a class="btn btn-danger fs-6" href="">Delete</a></div> {% endcomment %}
 
 
                                 {% else %}
