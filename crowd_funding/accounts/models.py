@@ -23,8 +23,8 @@ class CustomUser(AbstractUser):
     activation_token_created_at = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=False)
     birth_date=models.DateField(null=True,blank=True)
-    facebook_profile=models.CharField(null=True,blank=True)
-    country=models.CharField(null=True,blank=True)
+    facebook_profile=models.CharField(null=True,blank=True,max_length=100)
+    country=models.CharField(null=True,blank=True,max_length=100)
 
 
 
@@ -47,8 +47,8 @@ class UserProfile(models.Model):
     activation_token_created_at = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=False)
     birth_date=models.DateField(null=True,blank=True)
-    facebook_profile=models.CharField(null=True,blank=True)
-    country=models.CharField(null=True,blank=True)
+    facebook_profile=models.CharField(null=True,blank=True,max_length=100)
+    country=models.CharField(null=True,blank=True,max_length=100)
 
     def get_image_url(self):
         return f'/media/{self.image}'
