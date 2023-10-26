@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.pyc
 _pycache_/
 
@@ -5,3 +6,17 @@ venv/
 myenv/
 logs/
 db.sqlite3
+=======
+# Ignore compiled Python files
+*.pyc
+
+__pycache__/
+
+# Ignore the virtual environment directory
+venv/
+
+# Ignore logs and databases
+logs/
+db.sqlite3
+
+>>>>>>> DoneProjectBranch

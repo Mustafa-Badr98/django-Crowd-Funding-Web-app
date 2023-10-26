@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 *.pyc
 _pycache_/
 
 venv/
 myenv/
+=======
+
+*.pyc
+__pycache__/
+
+venv/
+>>>>>>> DoneProjectBranch
 logs/
 db.sqlite3
