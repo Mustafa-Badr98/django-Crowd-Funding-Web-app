@@ -1,0 +1,7 @@
+*.pyc
+_pycache_/
+
+venv/
+myenv/
+logs/
+db.sqlite3

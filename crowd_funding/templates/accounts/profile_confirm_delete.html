@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div style=" margin-left: 30px; height: 526px;">
+        <h1 style="margin: 30px;"> Delete Your Profile : </h1>
+        <form method="post" enctype="multipart/form-data" style="margin-left: 50px;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" style="margin: 20px;">Delete</button>
+            <a class="btn btn-primary" aria-current="page" href="{% url 'profile_view'%}" style="margin: 20px;">Cancel</a>
+        </form>
+        <script src="{% static 'accounts/js/script.js'%}"></script>
+    </div>
+{% endblock content %} 
