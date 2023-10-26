@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+{% endblock content %}
+
+{% block landingSection %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="offset-4 col-4">
+            <form class="d-flex mb-5" action="{% url 'project.search' %}" method="get">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value=""
+                    name="searchedWord" />
+                <button class="btn btn-outline-success" type="submit">
+                    Search
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <h1> search result</h1>
+    </div>
+
+
+
+    <div class="row mt-4 pb-5">
+        <div class="container">
+            <div class="row">
+                {% for project in projectsList  %}
+                <div class="col-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{project.get_main_image_url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <div class="row">
+                                <span class="card-title fs-6 col-8 fw-bold">{{project.title}}</span>
+                                <span style="font-size:15px;background-color: chocolate;" class="badge col-4">Rate:
+                                    {{project.average_rate}}</span>
+                            </div>
+
+                            <p class="card-text">{{project.details}}</p>
+                            <div class="row">
+                                <div class="col-8">
+                                    <span style="font-size:15px" class="fw-bold">Goal Fund:
+                                        {{project.total_target}}</span>
+
+                                </div>
+                                <a href="{{project.get_show_url}}" class="btn btn-primary col-4">View</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    {% endblock landingSection %}

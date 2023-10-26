@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}craete project{% endblock title %}
+{% block content %}
+{% endblock %}
+
+
+{% block landingSection %}
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data" class="my-4">
+  {% csrf_token %}
+{{ form }}
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<script src="{% static 'bootstrap/js/script.js'%}"></script>
+</div>
+{% endblock landingSection %}

@@ -1,10 +1,8 @@
-# Ignore compiled Python files
 *.pyc
+_pycache_/
 
-# Ignore the virtual environment directory
 venv/
+myenv/
 
-# Ignore logs and databases
 logs/
 db.sqlite3
-
