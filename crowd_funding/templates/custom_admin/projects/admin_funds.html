@@ -4,30 +4,32 @@
 
 <div class="container mt-5">
 
-    <h1>All Rates</h1>
-    <p>Number of reported projects :{{reportedProjects|length}} </p>
+    <h1>All Users Funds</h1>
+    <p>Number of Funds  :{{funds|length}} </p>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">user</th>
                 <th scope="col">project</th>
-                <th scope="col">Reason</th>
+                <th scope="col">Fund amount</th>
+                <th scope="col">Transaction Date</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
 
-            {% for rp in reportedProjects %}
+            {% for fn in funds %}
 
 
 
             <tr>
-                <th scope="row">{{rp.id}}</th>
-                <td>{{rp.user}}</td>
-                <td>{{rp.project}} </td>
-                <td> {{rp.reason}}</td>
+                <th scope="row">{{fn.id}}</th>
+                <td>{{fn.user}}</td>
+                <td>{{fn.project}} </td>
+                <td> {{fn.amount}}</td>
+                <td> {{fn.transaction_date}}</td>
 
                 <td><a class="btn btn-dark" href="">Edit</a></td>
                 <td><a class="btn btn-danger" href="">Delete</a></td>

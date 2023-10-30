@@ -29,7 +29,9 @@ class CustomUser(AbstractUser):
 
 
 
-
+    @classmethod
+    def get_all_objects(cls):
+        return cls.objects.all()
 
     def get_image_url(self):
         return f'/media/{self.image}'

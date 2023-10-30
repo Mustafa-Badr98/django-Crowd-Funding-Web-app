@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Edit the user</h1>
+    <form method="post" enctype="multipart/form-data" class="my-4">
+        {% csrf_token %}
+        {{ form }}
+
+        <div class="row">
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary">Edit</button>
+
+            </div>
+
+        </div>
+    </form>
+    <script src="{% static 'bootstrap/js/script.js'%}"></script>
+</div>
+
+
+{% endblock content %}

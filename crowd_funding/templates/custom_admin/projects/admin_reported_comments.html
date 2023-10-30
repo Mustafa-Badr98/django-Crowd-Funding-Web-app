@@ -5,13 +5,14 @@
 <div class="container mt-5">
 
     <h1>All Rates</h1>
-    <p>Number of reported projects :{{reportedProjects|length}} </p>
+    <p>Number of reported comments :{{reportedComments|length}} </p>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">user</th>
-                <th scope="col">project</th>
+                <th scope="col">Project</th>
+                <th scope="col">comment</th>
                 <th scope="col">Reason</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -19,15 +20,16 @@
         </thead>
         <tbody>
 
-            {% for rc in reportedProjects %}
+            {% for rc in reportedComments %}
 
 
 
             <tr>
-                <th scope="row">{{reportedProjects.id}}</th>
-                <td>{{reportedProjects.user}}</td>
-                <td>{{reportedProjects.project}} </td>
-                <td> {{reportedProjects.reason}}</td>
+                <th scope="row">{{rc.id}}</th>
+                <td>{{rc.user}}</td>
+                <td>{{rc.comment.project}}</td>
+                <td>{{rc.comment.comment_text}} </td>
+                <td> {{rc.reason}}</td>
 
                 <td><a class="btn btn-dark" href="">Edit</a></td>
                 <td><a class="btn btn-danger" href="">Delete</a></td>

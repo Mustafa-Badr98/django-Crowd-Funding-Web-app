@@ -10,7 +10,7 @@
         <div class="col-4">
             Authentication
             <ul>
-                <li><a href="">Users</a></li>
+                <li><a href="{% url 'custom_admin_users' %}">Users</a></li>
             </ul>
         </div>
     </div>
@@ -21,7 +21,7 @@
             Category
             <ul>
                 <li><a href="{% url 'custom_admin_categories' %}">Categories</a></li>
-            </ul>
+               
         </div>
     </div>
     <div class="row">
@@ -29,10 +29,19 @@
             Projects
             <ul>
                 <li><a href="{% url 'custom_admin_projects' %}">Projects</a></li>
-    
                 <li><a href="{% url 'custom_admin_rates' %}">Projects Rates</a></li>
                 <li><a href="{% url 'custom_admin_comments' %}">Projects Comments</a></li>
     
+    
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            Users Funds
+            <ul>
+                <li><a href="{% url 'custom_admin_funds' %}">Funds</a></li>
+               
     
             </ul>
         </div>
