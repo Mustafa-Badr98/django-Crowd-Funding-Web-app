@@ -4,19 +4,21 @@
 {% block content %}
 
 <div class="container">
-    <h1>Create a Category</h1>
+    <h1>Delete Rate</h1>
     <form method="post" enctype="multipart/form-data" class="my-4">
         {% csrf_token %}
-        {{ form }}
 
+        <h4>Are you sure you want to Delete ?</h4>
         <div class="row">
             <div class="col-2">
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-danger">Delete Rate</button>
 
             </div>
 
         </div>
     </form>
+    <a  href="{% url 'custom_admin_users' %}" class="btn btn-secondary">Cancel Delete</a>
+
     <script src="{% static 'bootstrap/js/script.js'%}"></script>
 </div>
 

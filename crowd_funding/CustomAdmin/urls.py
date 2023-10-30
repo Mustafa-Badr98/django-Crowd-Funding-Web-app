@@ -5,6 +5,8 @@ from CustomAdmin.views import custom_admin_dashboard,admin_projects,admin_catego
 from CustomAdmin.views import admin_ReportedComments,admin_funds,admin_users,admin_EditUser,admin_CreateUser
 from CustomAdmin.views import admin_DeleteUser,admin_CreateCategory,admin_EditCategory,admin_DeleteCategory
 from CustomAdmin.views import admin_CreateProject,admin_EditProject,admin_DeleteProject
+from CustomAdmin.views import admin_CreateRate,admin_EditRate,admin_DeleteRate
+
 urlpatterns = [
     
     path('custom-admin/dashboard/', custom_admin_dashboard, name='custom_admin_dashboard'),
@@ -20,6 +22,7 @@ urlpatterns = [
     path('custom-admin/edit_categories/<int:id>', admin_EditCategory, name='custom_admin_categories_edit'),
     path('custom-admin/delete_categories/<int:id>', admin_DeleteCategory, name='custom_admin_categories_delete'),
 
+
     path('custom-admin/projects/', admin_projects, name='custom_admin_projects'),
     path('custom-admin/create_project/', admin_CreateProject, name='custom_admin_project_create'),
     path('custom-admin/edit_project/<int:id>', admin_EditProject, name='custom_admin_project_edit'),
@@ -27,6 +30,11 @@ urlpatterns = [
 
 
     path('custom-admin/rates/', admin_Rating, name='custom_admin_rates'),
+    path('custom-admin/create_rate/', admin_CreateRate, name='custom_admin_rate_create'),
+    path('custom-admin/edit_rate/<int:id>', admin_EditRate, name='custom_admin_rate_edit'),
+    path('custom-admin/delete_rate/<int:id>', admin_DeleteRate, name='custom_admin_rate_delete'),
+
+    
     path('custom-admin/comments/', admin_Comments, name='custom_admin_comments'),
     path('custom-admin/reported_comments/', admin_ReportedComments, name='custom_admin_reported_comments'),
     path('custom-admin/reported_projects/', admin_ReportedProjects, name='custom_admin_reported_projects'),

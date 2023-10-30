@@ -4,7 +4,7 @@ from accounts.models import CustomUser
 from projects.models import Project,Category,Rating,Comment,ReportedProject,ReportedComment,Funding
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from CustomAdmin.forms import UserForm,CategoryForm,ProjectForm
+from CustomAdmin.forms import UserForm,CategoryForm,ProjectForm,RateForm
 
 @login_required
 def custom_admin_dashboard(request):
@@ -39,7 +39,7 @@ def admin_categories(request):
 @login_required
 def admin_Rating(request):
     rates=Rating.get_all_objects()
-    return render(request, 'custom_admin/projects/admin_rates.html',context={'rates': rates})
+    return render(request, 'custom_admin/rates/admin_rates.html',context={'rates': rates})
 
 @login_required
 def admin_Comments(request):
@@ -206,6 +206,70 @@ def admin_DeleteProject(request,id):
         return redirect('custom_admin_projects') 
 
     return render(request, 'custom_admin/projects/admin_project_delete.html')
+
+
+
+
+
+
+
+@login_required
+def admin_CreateRate(request): 
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+        if form.is_valid(): 
+            projectFromForm=form.cleaned_data['project']
+            rateFromForm=form.cleaned_data['rate_value']
+            project=Project.get_specific_object(id=projectFromForm.id)
+            project.add_rate(rateFromForm)
+            print("///////////////////////////////////")
+            
+            rate = form.save()  
+            
+            return redirect('custom_admin_rates')  
+    else:
+        form = RateForm()
+    return render(request, 'custom_admin/rates/admin_rates_create.html',context={'form': form})
+
+
+
+@login_required
+def admin_EditRate(request,id):
+    rate=Rating.objects.get(id = id)
+    if request.method == 'POST':
+        form = RateForm(request.POST, instance=rate)
+        if form.is_valid():
+            projectFromForm=form.cleaned_data['project']
+            oldRate=projectFromForm.average_rate
+            newRate=form.cleaned_data['rate_value']
+            project=Project.get_specific_object(id=projectFromForm.id)
+            project.edit_rate(newRate,oldRate)
+            rate = form.save()    
+            return redirect('custom_admin_rates')  
+    else:
+        form = RateForm(instance=rate)
+    
+    return render(request, 'custom_admin/rates/admin_rates_edit.html',context={'form': form})
+
+
+
+@login_required
+def admin_DeleteRate(request,id):
+    rate = get_object_or_404(Rating, id=id)
+
+    if request.method == 'POST':
+        projectFromRate=rate.project
+        
+        oldRate=rate.rate_value
+        project=Project.get_specific_object(id=projectFromRate.id)
+        project.delete_rate(oldRate)
+        
+        rate.delete()
+        return redirect('custom_admin_rates') 
+
+    return render(request, 'custom_admin/rates/admin_rates_delete.html')
+
+
 
 
 

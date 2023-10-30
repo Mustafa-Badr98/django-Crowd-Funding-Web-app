@@ -5,6 +5,13 @@
 <div class="container mt-5">
 
     <h1>All Rates</h1>
+
+
+    <div class="row">
+        <div class="offset-8 col-4">
+            <a class="btn btn-success" href="{% url 'custom_admin_rate_create' %}">Create Rate</a>
+        </div>
+    </div>
     <p>Number of rate :{{rates|length}} </p>
     <table class="table">
         <thead>
@@ -29,8 +36,8 @@
                 <td>{{rate.project}} </td>
                 <td> {{rate.rate_value}}</td>
 
-                <td><a class="btn btn-dark" href="">Edit</a></td>
-                <td><a class="btn btn-danger" href="">Delete</a></td>
+                <td><a class="btn btn-dark" href="{% url 'custom_admin_rate_edit' rate.id %}">Edit</a></td>
+                <td><a class="btn btn-danger" href="{% url 'custom_admin_rate_delete' rate.id %}">Delete</a></td>
             </tr>
             {% endfor %}
 

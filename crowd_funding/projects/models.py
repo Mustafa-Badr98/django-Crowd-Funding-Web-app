@@ -135,15 +135,21 @@ class Project(models.Model):
             projectTags.append(self.tag4)
         return projectTags
         
-    def add_rate(self, new_rate):   
+    
+      
+    def add_rate(self, new_rate):
+        print("we are i the add_rate")
         self.total_rate += new_rate
         self.num_of_ratings += 1
-        self.average_rate = self.total_rate / self.num_of_ratings
-        rounded_average_rate = round(self.average_rate, 2)
-        self.average_rate=rounded_average_rate
+
+        if self.num_of_ratings > 0:
+            self.average_rate = self.total_rate / self.num_of_ratings
+            self.average_rate = round(self.average_rate, 2)
         self.save()
+            
         
-    def edit_rate(self, new_rate,old_rate):   
+    def edit_rate(self, new_rate,old_rate): 
+        print("we are in delete")  
         self.total_rate -= old_rate
         self.total_rate += new_rate
         self.average_rate = self.total_rate / self.num_of_ratings
@@ -151,6 +157,26 @@ class Project(models.Model):
         self.average_rate=rounded_average_rate
         self.save()    
         
+    
+    
+    def delete_rate(self,oldRate):
+        print("the problem from here")
+        print(self.total_rate)
+        self.total_rate -= oldRate
+        print(self.total_rate)
+        self.num_of_ratings -= 1
+        print(self.average_rate)
+        if self.num_of_ratings > 0:
+            self.average_rate = self.total_rate / self.num_of_ratings
+            self.average_rate = round(self.average_rate, 2)
+            print(self.average_rate)
+            
+        else:
+            self.average_rate=0
+        self.save()
+        
+        
+            
     def get_edit_url(self):
         return  reverse('projects.edit',args=[self.id])
 
@@ -168,17 +194,7 @@ class Project(models.Model):
     def get_specific_object(cls,id):
         return cls.objects.get(id=id)
     
-    def add_rate(self, new_rate):
-       
-        self.total_rate += new_rate
-        self.num_of_ratings += 1
-
-        if self.num_of_ratings > 0:
-            self.average_rate = self.total_rate / self.num_of_ratings
-            self.average_rate = round(self.average_rate, 2)
-
-        self.save()
-        
+   
     def get_all_ratings(self):
         return self.ratings.all()    
         
