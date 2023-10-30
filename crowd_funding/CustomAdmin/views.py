@@ -116,9 +116,15 @@ def admin_SearchUser(request):
         search_field = request.POST.get('search_field', 'username') 
         print(searched_word)
         users = CustomUser.objects.all()
+        
+        
 
         if search_field == 'username':
             users = users.filter(username__icontains=searched_word)
+        elif search_field == 'id':
+            searchID=int(searched_word)
+            users = users.filter(id=searchID)
+        
         elif search_field == 'first_name':
             users = users.filter(first_name__icontains=searched_word)
         elif search_field == 'last_name':
@@ -199,6 +205,28 @@ def admin_DeleteCategory(request,id):
 
 
 
+
+
+
+@login_required
+def admin_SearchCategory(request):
+   
+    if request.method == 'POST':
+        searched_word=request.POST.get('searched_word')
+        search_field = request.POST.get('search_field', 'id') 
+        print(searched_word)
+        category = Category.objects.all()
+
+        if search_field == 'id':
+            searchID=int(searched_word)
+            category = category.filter(id=searchID)
+        elif search_field == 'name':
+            category = category.filter(name__icontains=searched_word)
+        
+       
+        return render(request, 'custom_admin/categories/admin_categories_searched.html',context={'category_searched': category})
+
+    return render(request, 'custom_admin/categories/admin_categories.html')
 
 
 

@@ -3,7 +3,7 @@ from django.urls import include
 from django.urls import path
 from CustomAdmin.views import custom_admin_dashboard,admin_projects,admin_categories,admin_Rating,admin_Comments,admin_ReportedProjects
 from CustomAdmin.views import admin_ReportedComments,admin_funds,admin_users,admin_EditUser,admin_CreateUser,admin_SearchUser,admin_SortUsers
-from CustomAdmin.views import admin_DeleteUser,admin_CreateCategory,admin_EditCategory,admin_DeleteCategory
+from CustomAdmin.views import admin_DeleteUser,admin_CreateCategory,admin_EditCategory,admin_DeleteCategory,admin_SearchCategory
 from CustomAdmin.views import admin_CreateProject,admin_EditProject,admin_DeleteProject
 from CustomAdmin.views import admin_CreateRate,admin_EditRate,admin_DeleteRate
 
@@ -24,6 +24,7 @@ urlpatterns = [
     path('custom-admin/create_categories/', admin_CreateCategory, name='custom_admin_categories_create'),
     path('custom-admin/edit_categories/<int:id>', admin_EditCategory, name='custom_admin_categories_edit'),
     path('custom-admin/delete_categories/<int:id>', admin_DeleteCategory, name='custom_admin_categories_delete'),
+    path('custom-admin/search_categories/', admin_SearchCategory, name='custom_admin_categories_search'),
 
 
     path('custom-admin/projects/', admin_projects, name='custom_admin_projects'),

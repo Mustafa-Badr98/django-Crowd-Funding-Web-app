@@ -26,6 +26,7 @@
                 <label for="search_field">Search By:</label>
                 <select name="search_field" class="form-control">
                     <option value="username">Username</option>
+                    <option value="id">id</option>
                     <option value="first_name">First Name</option>
                     <option value="last_name">Last Name</option>
                     <option value="email">Email</option>
@@ -36,10 +37,10 @@
 
         </div>
 
-        <div class="col-3 mb-5">
+        <div class="offset-3 col-3 mb-5">
             <form action="{% url 'custom_admin_user_sort' %}" method="post">
                 {% csrf_token %}
-
+              
                 <label for="sort_by">sort By:</label>
                 <select name="sort_by" class="form-control">
                     <option value="username">Username</option>
@@ -47,7 +48,7 @@
                     <option value="id"> id </option>
 
                 </select>
-                <button class="btn btn-primary" type="submit">ok</button>
+                <button class="btn btn-primary mt-3" type="submit">ok</button>
             </form>
 
         </div>
