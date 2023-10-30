@@ -155,7 +155,7 @@ def admin_SortUsers(request):
         return render(request, 'custom_admin/users/admin_user_sorted.html',context={'user_sorted': users_sorted})
         
 
-    return render(request, 'custom_admin/users/admin_user_delete.html')
+    return render(request, 'custom_admin/users/admin_users.html')
 
 
 
@@ -201,9 +201,6 @@ def admin_DeleteCategory(request,id):
         return redirect('custom_admin_categories') 
 
     return render(request, 'custom_admin/categories/admin_category_delete.html')
-
-
-
 
 
 
@@ -274,6 +271,72 @@ def admin_DeleteProject(request,id):
         return redirect('custom_admin_projects') 
 
     return render(request, 'custom_admin/projects/admin_project_delete.html')
+
+
+
+
+@login_required
+def admin_SearchProjects(request):
+   
+    if request.method == 'POST':
+        searched_word=request.POST.get('searched_word')
+        search_field = request.POST.get('search_field', 'username') 
+        
+        
+        projects=Project.objects.all()
+
+        if search_field == 'title':
+            projects = projects.filter(title__icontains=searched_word)
+        elif search_field == 'id':
+            searchID=int(searched_word)
+            projects = projects.filter(id=searchID)
+        
+        elif search_field == 'Category':
+            projects = projects.filter(Category__name__icontains=searched_word)
+        elif search_field == 'owner':
+            projects = projects.filter(owner__first_name__icontains=searched_word)
+        elif search_field == 'average_rate':
+            searchRate=int(searched_word)
+            projects = projects.filter(average_rate=searchRate)
+       
+        return render(request, 'custom_admin/projects/admin_project_searched.html',context={'projects_searched': projects})
+
+    return render(request, 'custom_admin/projects/admin_projects.html')
+
+
+@login_required
+def admin_SortProjects(request):
+    
+    if request.method == 'POST':
+        sort_by=request.POST.get('sort_by')
+        projects_sorted=Project.objects.all()
+
+        if sort_by == 'title':
+            projects_sorted = Project.objects.all().order_by('title')
+        elif sort_by == 'Category':
+            projects_sorted = Project.objects.all().order_by('Category')
+        elif sort_by == 'id':
+            projects_sorted = Project.objects.all().order_by('id')
+        elif sort_by == 'average_rate_a':
+            projects_sorted = Project.objects.all().order_by('average_rate')
+        elif sort_by == 'average_rate_b':
+            projects_sorted = Project.objects.all().order_by('-average_rate')    
+        return render(request, 'custom_admin/projects/admin_project_sorted.html',context={'projects_sorted': projects_sorted})
+        
+
+    return render(request, 'custom_admin/projects/admin_projects.html')
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

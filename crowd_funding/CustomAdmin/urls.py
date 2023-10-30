@@ -4,7 +4,7 @@ from django.urls import path
 from CustomAdmin.views import custom_admin_dashboard,admin_projects,admin_categories,admin_Rating,admin_Comments,admin_ReportedProjects
 from CustomAdmin.views import admin_ReportedComments,admin_funds,admin_users,admin_EditUser,admin_CreateUser,admin_SearchUser,admin_SortUsers
 from CustomAdmin.views import admin_DeleteUser,admin_CreateCategory,admin_EditCategory,admin_DeleteCategory,admin_SearchCategory
-from CustomAdmin.views import admin_CreateProject,admin_EditProject,admin_DeleteProject
+from CustomAdmin.views import admin_CreateProject,admin_EditProject,admin_DeleteProject,admin_SearchProjects,admin_SortProjects
 from CustomAdmin.views import admin_CreateRate,admin_EditRate,admin_DeleteRate
 
 urlpatterns = [
@@ -31,6 +31,9 @@ urlpatterns = [
     path('custom-admin/create_project/', admin_CreateProject, name='custom_admin_project_create'),
     path('custom-admin/edit_project/<int:id>', admin_EditProject, name='custom_admin_project_edit'),
     path('custom-admin/delete_project/<int:id>', admin_DeleteProject, name='custom_admin_project_delete'),
+    path('custom-admin/search_project/', admin_SearchProjects, name='custom_admin_project_search'),
+    path('custom-admin/sort_project/', admin_SortProjects, name='custom_admin_project_sort'),
+    
 
 
     path('custom-admin/rates/', admin_Rating, name='custom_admin_rates'),

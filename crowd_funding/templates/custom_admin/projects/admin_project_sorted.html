@@ -62,7 +62,7 @@
         </div>
     </div>
   
-    <p>Total number of projects: {{ projects|length }}</p>
+    <p>Total number of projects: {{ projects_searched|length }}</p>
 
     <table class="table">
         <thead>
@@ -84,7 +84,7 @@
         </thead>
         <tbody>
 
-            {% for pro in projects %}
+            {% for pro in projects_sorted %}
 
 
 
