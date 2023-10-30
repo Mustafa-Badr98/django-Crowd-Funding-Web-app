@@ -1,6 +1,6 @@
 import re
 from django import forms
-from accounts.models import UserProfile, CustomUser
+from accounts.models import CustomUser
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm as BaseUserChangeForm
 
 
@@ -29,10 +29,3 @@ class UserChangeForm(BaseUserChangeForm):
     class Meta:
         model = CustomUser
         fields = ['image' ,'username', 'first_name', 'last_name', 'email',  'phone_number']
-
-
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        # fields = ['username', 'first_name', 'last_name', 'email', 'is_active', 'is_staff', 'password']
-        fields = '__all__'

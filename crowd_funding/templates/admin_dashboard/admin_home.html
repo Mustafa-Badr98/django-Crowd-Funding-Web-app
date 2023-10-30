@@ -1,24 +1,66 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<h1 class=" bg-dark text-light" >Admin Dashboard</h1>
+  <h1 class=" bg-dark text-light" >Admin Dashboard</h1>
 
-<div class="container my-4">
-  <div class="row justify-content-center">
-    <div class="col-10 card mb-4">
-      <div class="card-body">
-        <h2 class="card-title text-center bg-dark text-light">User Accounts</h2>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item d-flex justify-content-between">
-            <a href="{% url 'users_list' %}" class="text-primary text-decoration-none"><span class="fw-bold">Users</span></a>
-            <span class="badge bg-primary">{{ total_users }}</span>
-          </li>
-        </ul>
+  <div class="container my-4">
+    <div class="row justify-content-center">
+      <div class="col-10 card mb-4">
+        <div class="card-body">
+          <h2 class="card-title text-center bg-dark text-light">ACCOUNTS</h2>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between">
+              <a href="{% url 'users_list' %}" class="text-primary text-decoration-none"><span class="fw-bold">Users</span></a>
+              <span class="badge bg-primary">{{ total_users }}</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-</div>  
+  </div>  
 
-<script src="{% static 'accounts/js/script.js' %}"></script>
+  <div class="container my-4">
+    <div class="row justify-content-center">
+      <div class="col-10 card mb-4">
+        <div class="card-body">
+          <h2 class="card-title text-center bg-dark text-light">PROJECTS</h2>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between">
+              <a href="{% url 'categories_list' %}" class="text-primary text-decoration-none"><span class="fw-bold">Categorys</span></a>
+              <span class="badge bg-primary">{{ total_categories }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <a href="" class="text-primary text-decoration-none"><span class="fw-bold">Comments</span></a>
+              <span class="badge bg-primary">{{ total_comments }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <a href="" class="text-primary text-decoration-none"><span class="fw-bold">Fundings</span></a>
+              <span class="badge bg-primary">{{ total_Funding }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <a href="{% url 'projects_list' %}" class="text-primary text-decoration-none"><span class="fw-bold">Projects</span></a>
+              <span class="badge bg-primary">{{ total_projects }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <a href="" class="text-primary text-decoration-none"><span class="fw-bold">Ratings</span></a>
+              <span class="badge bg-primary">{{ total_rating }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <a href="" class="text-primary text-decoration-none"><span class="fw-bold">Reported comments</span></a>
+              <span class="badge bg-primary">{{ total_reportedcomment }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <a href="" class="text-primary text-decoration-none"><span class="fw-bold">Reported projects</span></a>
+              <span class="badge bg-primary">{{ total_reportedproject }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  
+
+  <script src="{% static 'accounts/js/script.js' %}"></script>
 
 {% endblock content%}

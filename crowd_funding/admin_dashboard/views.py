@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from admin_dashboard.forms import UserChangeForm, UserForm, UserProfileForm
+from admin_dashboard.forms import UserChangeForm, UserForm
 from django.contrib.auth.decorators import user_passes_test
 from accounts.models import UserProfile, CustomUser
 from django.views.generic.edit import  CreateView
 from django.urls import reverse_lazy
+from projects.models import Category, Project, Rating, Comment, ReportedProject, ReportedComment, Funding
+
 
 
 
@@ -14,8 +16,22 @@ def is_admin(user):
 @user_passes_test(is_admin)
 def admin_home(request):
     total_users = CustomUser.objects.all().count()
+    total_categories = Category.objects.all().count()
+    total_rating = Rating.objects.all().count()
+    total_projects = Project.objects.all().count()
+    total_comments = Comment.objects.all().count()
+    total_reportedproject = ReportedProject.objects.all().count()
+    total_reportedcomment = ReportedComment.objects.all().count()
+    total_Funding = Funding.objects.all().count()
     counts = {
         'total_users': total_users,
+        'total_categories': total_categories,
+        'total_rating': total_rating,
+        'total_projects': total_projects,
+        'total_comments': total_comments,
+        'total_reportedproject': total_reportedproject,
+        'total_reportedcomment': total_reportedcomment,
+        'total_Funding': total_Funding,
     }
     return render(request, 'admin_dashboard/admin_home.html', counts)
 
@@ -62,3 +78,16 @@ def user_delete(request, id):
         user_to_delete.delete()
         return redirect('users_list')
     return render(request, 'admin_dashboard/users/user_delete.html')
+
+
+@user_passes_test(is_admin)
+def categories_list(request):
+    categories = Category.objects.all()
+    return render(request, 'admin_dashboard/categories/categories_list.html', context={'categories': categories})
+
+
+@user_passes_test(is_admin)
+def projects_list(request):
+    projects = Project.objects.all()
+    return render(request, 'admin_dashboard/projects/projects_list.html', context={"projects": projects})
+

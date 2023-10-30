@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <div class="container my-4">
+    <div>
+      <h2>Projects</h2>
+      <a href="" class="btn btn-success" style="margin-top: 20px; margin-bottom: 20px;">Add New Project</a> 
+    </div>
+    <ul class="list-group">
+      {% for project in projects %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span class="font-weight-bold">{{ project.title }}</span>
+        <div>
+          <a href="" name="project_show" class="btn btn-primary btn-sm mx-1">Show</a>
+          <a href="" name="project_edit" class="btn btn-warning btn-sm mx-1">Edit</a>
+          <a href="" name="project_delete" class="btn btn-danger btn-sm mx-1">Delete</a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul> 
+  </div>
+  <script src="{% static 'accounts/js/script.js' %}"></script>
+{% endblock %}
