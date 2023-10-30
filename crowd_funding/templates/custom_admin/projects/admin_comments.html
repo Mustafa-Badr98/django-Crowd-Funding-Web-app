@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block  content %}
+
+<div class="container mt-5">
+
+    <h1>All Comments</h1>
+    <p>Number od comments {{comments|length}}</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">user</th>
+                <th scope="col">projects</th>
+                <th scope="col">comment</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for com in comments %}
+
+
+
+            <tr>
+                <th scope="row">{{com.id}}</th>
+                <td> {{com.user}}</td>
+                <td>{{com.project}}</td>
+                <td>{{com.comment_text}} </td>
+                <td><a class="btn btn-dark" href="">Edit</a></td>
+                <td><a class="btn btn-danger" href="">Delete</a></td>
+            </tr>
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+{% endblock content %}

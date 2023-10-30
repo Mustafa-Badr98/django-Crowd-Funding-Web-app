@@ -32,6 +32,12 @@ class Category(models.Model):
         return cls.objects.all()
     
     
+    # def delete_object(self):
+    #     cat=Category.objects.get(id=self.id)
+    #     cat.delete()
+    #     return True
+    
+    
 
               
 class Project(models.Model):
@@ -152,7 +158,7 @@ class Project(models.Model):
         return  reverse('projects.show',args=[self.id])
 
     def get_delete_url(self):
-        return  reverse('projects.delete',args=[self.id])
+        return  reverse('projects.cancel',args=[self.id])
 
     @classmethod
     def get_all_objects(cls):
@@ -204,6 +210,9 @@ class Rating(models.Model):
     def __str__(self):
         return f"{self.user} rated {self.project} with {self.rate_value} stars"    
     
+    @classmethod
+    def get_all_objects(cls):
+        return cls.objects.all()
     
     
     
@@ -223,7 +232,9 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.user} commented on  {self.project}"        
     
-    
+    @classmethod
+    def get_all_objects(cls):
+        return cls.objects.all()
 
 
 class ReportedProject(models.Model):
@@ -236,6 +247,11 @@ class ReportedProject(models.Model):
     def __str__(self):
         return f"user : {self.user} Reported Project: {self.project.title}"
 
+
+    @classmethod
+    def get_all_objects(cls):
+        return cls.objects.all()
+
 class ReportedComment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
@@ -247,7 +263,9 @@ class ReportedComment(models.Model):
     def __str__(self):
         return f"User {self.user} Reported Comment: {self.comment.id}"
     
-    
+    @classmethod
+    def get_all_objects(cls):
+        return cls.objects.all()
     
 
 class Funding(models.Model):
@@ -260,4 +278,9 @@ class Funding(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.user.username} funded {self.project.title} - {self.amount}"    
+        return f"{self.user.username} funded {self.project.title} - {self.amount}"  
+    
+    
+    @classmethod
+    def get_all_objects(cls):
+        return cls.objects.all()  

@@ -14,9 +14,6 @@ class HomePageView(TemplateView):
         context['hightest_rated_projects'] = Project.objects.order_by('-average_rate')[:5]
         context['categories']=Category.objects.all()
        
-        
-        
-
         return context  
 
 

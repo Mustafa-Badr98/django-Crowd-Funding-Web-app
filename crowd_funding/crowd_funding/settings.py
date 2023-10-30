@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'social_django',
 
     'django_cleanup.apps.CleanupConfig',
-    'projects.apps.ProjectsConfig'
+    'projects.apps.ProjectsConfig',
+    'CustomAdmin.apps.CustomadminConfig',
+    
+   
 ]
 
 MIDDLEWARE = [

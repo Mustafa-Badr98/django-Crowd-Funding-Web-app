@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block  content %}
+
+<div class="container mt-5">
+
+    <h1>All Rates</h1>
+    <p>Number of rate :{{rates|length}} </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">user</th>
+                <th scope="col">projects</th>
+                <th scope="col">Rate</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for rate in rates %}
+
+
+
+            <tr>
+                <th scope="row">{{rate.id}}</th>
+                <td>{{rate.user}}</td>
+                <td>{{rate.project}} </td>
+                <td> {{rate.rate_value}}</td>
+
+                <td><a class="btn btn-dark" href="">Edit</a></td>
+                <td><a class="btn btn-danger" href="">Delete</a></td>
+            </tr>
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+{% endblock content %}

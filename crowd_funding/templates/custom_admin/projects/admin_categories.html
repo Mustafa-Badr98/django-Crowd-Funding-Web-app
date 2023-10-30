@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block  content %}
+
+<div class="container mt-5">
+
+    <h1>All Categories</h1>
+    <p>Number of categories :{{categories|length}} </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Rate</th>
+                <th scope="col">Fund target</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for cat in categories %}
+
+
+
+            <tr>
+                <th scope="row">{{cat.id}}</th>
+                <td> <a href="">{{cat}}</a></td>
+                <td>{{cat.name}}</td>
+                <td>{{cat.description}} </td>
+                <td><a class="btn btn-dark" href="">Edit</a></td>
+                <td><a class="btn btn-danger" href="">Delete</a></td>
+            </tr>
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+{% endblock content %}

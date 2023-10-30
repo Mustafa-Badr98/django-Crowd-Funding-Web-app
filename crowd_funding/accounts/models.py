@@ -25,6 +25,7 @@ class CustomUser(AbstractUser):
     birth_date=models.DateField(null=True,blank=True)
     facebook_profile=models.CharField(null=True,blank=True,max_length=100)
     country=models.CharField(null=True,blank=True,max_length=100)
+    is_admin = models.BooleanField(default=False) 
 
 
 

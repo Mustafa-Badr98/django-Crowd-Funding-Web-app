@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block  content %}
+
+<div class="container mt-5">
+
+    <h1>All Projects</h1>
+
+    <p>Total number of projects: {{ projects|length }}</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                
+               
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for pro in projects %}
+
+
+
+            <tr>
+                <th scope="row">{{pro.id}}</th>
+                <td> <a href="{{pro.get_show_url}}">{{pro}}</a></td>
+                <td><a class="btn btn-dark" href="">Edit</a></td>
+                <td><a class="btn btn-danger" href="">Delete</a></td>
+            </tr>
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+{% endblock content %}

@@ -16,6 +16,10 @@ from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from .forms import AccountForm, SetPasswordForm, PasswordResetForm
 from .models import UserProfile
+from projects.models import Project
+
+
+
 
 
 
