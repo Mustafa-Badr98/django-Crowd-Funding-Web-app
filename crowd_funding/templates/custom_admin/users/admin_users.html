@@ -6,10 +6,8 @@
 
     <h1>All Users</h1>
     <div class="row">
-        <div class="offset-2 col-3 mb-5">
+        <div class="col-3 mb-5">
 
-
-           
             <form action="{% url 'custom_admin_user_search' %}" method="post">
                 {% csrf_token %}
 
@@ -24,20 +22,39 @@
                         </button>
                     </span>
                 </div>
-               
-                    <label for="search_field">Search By:</label>
-                    <select name="search_field" class="form-control">
-                        <option value="username">Username</option>
-                        <option value="first_name">First Name</option>
-                        <option value="last_name">Last Name</option>
-                        <option value="email">Email</option>
-                    </select>
-                
+
+                <label for="search_field">Search By:</label>
+                <select name="search_field" class="form-control">
+                    <option value="username">Username</option>
+                    <option value="first_name">First Name</option>
+                    <option value="last_name">Last Name</option>
+                    <option value="email">Email</option>
+                </select>
+
 
             </form>
 
         </div>
-        <div class="offset-3 col-4">
+
+        <div class="col-3 mb-5">
+            <form action="{% url 'custom_admin_user_sort' %}" method="post">
+                {% csrf_token %}
+
+                <label for="sort_by">sort By:</label>
+                <select name="sort_by" class="form-control">
+                    <option value="username">Username</option>
+                    <option value="is_active"> is active </option>
+                    <option value="id"> id </option>
+
+                </select>
+                <button class="btn btn-primary" type="submit">ok</button>
+            </form>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="offset-8 col-4">
             <a class="btn btn-success" href="{% url 'custom_admin_user_create' %}">Create a user</a>
         </div>
     </div>

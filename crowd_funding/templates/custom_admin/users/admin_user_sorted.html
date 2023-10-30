@@ -30,6 +30,8 @@
 
         </div>
 
+        
+
         <div class="col-3 mb-5">
             <form action="{% url 'custom_admin_user_sort' %}" method="post">
                 {% csrf_token %}
@@ -39,7 +41,9 @@
                     <option value="username">Username</option>
                     <option value="is_active"> is active </option>
                     <option value="id"> id </option>
+                   
                 </select>
+                <button class="btn btn-primary" type="submit">OK</button>
             </form>
 
         </div>
@@ -71,7 +75,7 @@
         </thead>
         <tbody>
 
-            {% for us in user_searched %}
+            {% for us in user_sorted %}
 
 
 

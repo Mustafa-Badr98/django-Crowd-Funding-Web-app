@@ -131,6 +131,27 @@ def admin_SearchUser(request):
     return render(request, 'custom_admin/users/admin_users.html')
 
 
+@login_required
+def admin_SortUsers(request):
+    
+
+    if request.method == 'POST':
+        sort_by=request.POST.get('sort_by')
+        users_sorted=CustomUser.objects.all()
+
+        if sort_by == 'username':
+            users_sorted = CustomUser.objects.all().order_by('username')
+        elif sort_by == 'is_active':
+            users_sorted = CustomUser.objects.all().order_by('username')
+        elif sort_by == 'id':
+            users_sorted = CustomUser.objects.all().order_by('id')
+        
+        return render(request, 'custom_admin/users/admin_user_sorted.html',context={'user_sorted': users_sorted})
+        
+
+    return render(request, 'custom_admin/users/admin_user_delete.html')
+
+
 
 
 
