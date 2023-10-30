@@ -108,8 +108,27 @@ def admin_DeleteUser(request,id):
     return render(request, 'custom_admin/users/admin_user_delete.html')
 
 
+@login_required
+def admin_SearchUser(request):
+   
+    if request.method == 'POST':
+        searched_word=request.POST.get('searched_word')
+        search_field = request.POST.get('search_field', 'username') 
+        print(searched_word)
+        users = CustomUser.objects.all()
 
+        if search_field == 'username':
+            users = users.filter(username__icontains=searched_word)
+        elif search_field == 'first_name':
+            users = users.filter(first_name__icontains=searched_word)
+        elif search_field == 'last_name':
+            users = users.filter(last_name__icontains=searched_word)
+        elif search_field == 'email':
+            users = users.filter(email__icontains=searched_word)
+       
+        return render(request, 'custom_admin/users/admin_user_searched.html',context={'user_searched': users})
 
+    return render(request, 'custom_admin/users/admin_users.html')
 
 
 
