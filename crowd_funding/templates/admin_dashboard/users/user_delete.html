@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-4" style="height: 505px;">
+  <h2 class="mb-5">Delete User:</h2>
+  <h4>Are you sure You Want to Delete this User Profile ?</h4>
+  <form method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <button type="submit" name="user" class="btn btn-danger" >Delete</button>
+    <a href="{% url 'users_list' %}" name="user" class="btn btn-primary m-5">Cancel</a>
+  </form>
+</div>
+<script src="{% static 'accounts/js/script.js' %}"></script>
+{% endblock%}

@@ -16,7 +16,11 @@
                 <li class="nav-item">
                     <a class="nav-link text-white active" href="" aria-current="page">Contact Us</a>
                 </li>
-
+                {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white active" href="{% url 'admin_home' %}" aria-current="page">Admin Dashboard</a>
+                    </li>
+                {% endif %}
             </ul>
 
             {% if user.id %}

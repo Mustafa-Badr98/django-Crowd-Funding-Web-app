@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <div class="container my-4">
+    <h2 class="mb-5">Create a New User</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %} 
+      {{ user_form }}
+      <button type="submit" class="btn btn-primary" style="margin-top: 20px; margin-bottom: 20px;" name="user">Submit</button> <br>
+
+    </form>
+  </div>
+  <script src="{% static 'accounts/js/script.js' %}"></script>
+{% endblock%}

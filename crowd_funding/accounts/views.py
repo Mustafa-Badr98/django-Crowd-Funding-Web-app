@@ -15,7 +15,7 @@ from django.db.models.query_utils import Q
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from .forms import AccountForm, SetPasswordForm, PasswordResetForm
-from .models import UserProfile
+from .models import UserProfile, CustomUser
 
 
 
@@ -231,3 +231,16 @@ def passwordResetConfirm(request, uidb64, token):
 
     messages.error(request, 'Something went wrong, redirecting back to Homepage')
     return redirect("login")
+
+
+class DashboardProfileView(DetailView):
+    model = CustomUser  
+    template_name = 'accounts/profile_detail.html'  
+    context_object_name = 'user' 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_profile = UserProfile.objects.get(user=self.object)
+        context['user_profile'] = user_profile
+        return context
+    
