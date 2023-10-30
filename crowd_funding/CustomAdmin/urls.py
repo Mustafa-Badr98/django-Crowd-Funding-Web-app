@@ -4,6 +4,7 @@ from django.urls import path
 from CustomAdmin.views import custom_admin_dashboard,admin_projects,admin_categories,admin_Rating,admin_Comments,admin_ReportedProjects
 from CustomAdmin.views import admin_ReportedComments,admin_funds,admin_users,admin_EditUser,admin_CreateUser
 from CustomAdmin.views import admin_DeleteUser,admin_CreateCategory,admin_EditCategory,admin_DeleteCategory
+from CustomAdmin.views import admin_CreateProject,admin_EditProject,admin_DeleteProject
 urlpatterns = [
     
     path('custom-admin/dashboard/', custom_admin_dashboard, name='custom_admin_dashboard'),
@@ -17,9 +18,12 @@ urlpatterns = [
     path('custom-admin/categories/', admin_categories, name='custom_admin_categories'),
     path('custom-admin/create_categories/', admin_CreateCategory, name='custom_admin_categories_create'),
     path('custom-admin/edit_categories/<int:id>', admin_EditCategory, name='custom_admin_categories_edit'),
-    path('custom-admin/create_categories/<int:id>', admin_DeleteCategory, name='custom_admin_categories_delete'),
+    path('custom-admin/delete_categories/<int:id>', admin_DeleteCategory, name='custom_admin_categories_delete'),
 
     path('custom-admin/projects/', admin_projects, name='custom_admin_projects'),
+    path('custom-admin/create_project/', admin_CreateProject, name='custom_admin_project_create'),
+    path('custom-admin/edit_project/<int:id>', admin_EditProject, name='custom_admin_project_edit'),
+    path('custom-admin/delete_project/<int:id>', admin_DeleteProject, name='custom_admin_project_delete'),
 
 
     path('custom-admin/rates/', admin_Rating, name='custom_admin_rates'),
