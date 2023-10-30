@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <div class="container my-4">
+    <div>
+      <h2>Comments</h2>
+    </div>
+    <ul class="list-group">
+      {% for comment in comments %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span class="font-weight-bold">{{ comment.user }} Make Comment in {{ comment.project }}</span>
+        <div>
+          <a href="" name="project_show" class="btn btn-primary btn-sm mx-1">Show</a>
+          <a href="" name="project_edit" class="btn btn-warning btn-sm mx-1">Edit</a>
+          <a href="" name="project_delete" class="btn btn-danger btn-sm mx-1">Delete</a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul> 
+  </div>
+  <script src="{% static 'accounts/js/script.js' %}"></script>
+{% endblock %}

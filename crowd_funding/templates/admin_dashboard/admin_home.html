@@ -30,11 +30,11 @@
               <span class="badge bg-primary">{{ total_categories }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <a href="" class="text-primary text-decoration-none"><span class="fw-bold">Comments</span></a>
+              <a href="{% url 'comments_list' %}" class="text-primary text-decoration-none"><span class="fw-bold">Comments</span></a>
               <span class="badge bg-primary">{{ total_comments }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <a href="" class="text-primary text-decoration-none"><span class="fw-bold">Fundings</span></a>
+              <a href="{% url 'fundings_list' %}" class="text-primary text-decoration-none"><span class="fw-bold">Fundings</span></a>
               <span class="badge bg-primary">{{ total_Funding }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
@@ -42,15 +42,15 @@
               <span class="badge bg-primary">{{ total_projects }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <a href="" class="text-primary text-decoration-none"><span class="fw-bold">Ratings</span></a>
+              <a href="{% url 'ratings_list' %}" class="text-primary text-decoration-none"><span class="fw-bold">Ratings</span></a>
               <span class="badge bg-primary">{{ total_rating }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <a href="" class="text-primary text-decoration-none"><span class="fw-bold">Reported comments</span></a>
+              <a href="{% url 'reported_comments_list' %}" class="text-primary text-decoration-none"><span class="fw-bold">Reported comments</span></a>
               <span class="badge bg-primary">{{ total_reportedcomment }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <a href="" class="text-primary text-decoration-none"><span class="fw-bold">Reported projects</span></a>
+              <a href="{% url 'reported_projects_list' %}" class="text-primary text-decoration-none"><span class="fw-bold">Reported projects</span></a>
               <span class="badge bg-primary">{{ total_reportedproject }}</span>
             </li>
           </ul>

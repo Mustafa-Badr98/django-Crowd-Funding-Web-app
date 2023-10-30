@@ -91,3 +91,32 @@ def projects_list(request):
     projects = Project.objects.all()
     return render(request, 'admin_dashboard/projects/projects_list.html', context={"projects": projects})
 
+
+@user_passes_test(is_admin)
+def comments_list(request):
+    comments = Comment.objects.all()
+    return render(request, 'admin_dashboard/comments/comments_list.html', context={"comments": comments})
+
+
+@user_passes_test(is_admin)
+def fundings_list(request):
+    fundings = Funding.objects.all()
+    return render(request, 'admin_dashboard/fundings/fundings_list.html', context={"fundings": fundings})
+
+
+@user_passes_test(is_admin)
+def ratings_list(request):
+    ratings = Rating.objects.all()
+    return render(request, 'admin_dashboard/ratings/ratings_list.html', context={"ratings": ratings})
+
+
+@user_passes_test(is_admin)
+def reported_comments_list(request):
+    reported_comments = ReportedComment.objects.all()
+    return render(request, 'admin_dashboard/reported_comments/reported_comments_list.html', context={"reportedcomments": reported_comments})
+
+
+@user_passes_test(is_admin)
+def reported_projects_list(request):
+    reported_projects = ReportedProject.objects.all()
+    return render(request, 'admin_dashboard/reported_projects/reported_projects_list.html', context={"reportedprojects": reported_projects})
