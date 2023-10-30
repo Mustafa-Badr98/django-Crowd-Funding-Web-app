@@ -25,7 +25,7 @@ class ProjectForm(forms.ModelForm):
         fields = ['title','details','Category' ,'owner',
                   'total_target','num_of_ratings','total_rate',
                   'average_rate','main_image','image1','image2','image3','image4',
-                  'tag1','tag2','tag3','tag4','start_date','end_date',
+                  'tag1','tag2','tag3','tag4','start_date',
                   'is_featured'
                   ]
 
